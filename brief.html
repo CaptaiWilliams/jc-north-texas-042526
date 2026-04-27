@@ -551,6 +551,20 @@
     display: inline-block;
   }
 
+  /* ── EXPORT BUTTON ── */
+  .btn-export {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 20px; margin:12px 0;
+    background:var(--navy); color:#fff;
+    border:none; border-radius:6px; cursor:pointer;
+    font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.8rem;
+    letter-spacing:0.03em; text-transform:uppercase;
+    transition:background 0.2s, transform 0.1s;
+  }
+  .btn-export:hover { background:#003366; }
+  .btn-export:active { transform:scale(0.97); }
+  .btn-export svg { width:16px; height:16px; fill:currentColor; }
+
   /* ── PRINT ── */
   @media print {
     body { background: white; }
@@ -638,9 +652,15 @@
     </div>
     <div class="tl-item">
       <div class="tl-dot pending"></div>
-      <div class="tl-time">Tuesday, April 28 &mdash; 12:00 PM</div>
+      <div class="tl-time">Tuesday, April 28 &mdash; 1:00 PM</div>
+      <div class="tl-title">Phase 1: Additional ISD Inspections</div>
+      <div class="tl-desc"><strong>Matt Williams</strong> &rarr; Whitewright ISD (Grayson County). <strong>Derick Dearing</strong> &rarr; Rains ISD. Both appointments at 1:00 PM.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot pending"></div>
+      <div class="tl-time">Tuesday, April 28 &mdash; Evening</div>
       <div class="tl-title">Phase 2: Check-In</div>
-      <div class="tl-desc">Matt reports findings to full team. Initial assessment of damage severity and deployment viability.</div>
+      <div class="tl-desc">Matt reports findings from Tom Bean, Whitewright, and advance recon. Derick reports on Grand Saline and Rains. Assessment of damage severity and deployment viability.</div>
     </div>
     <div class="tl-item">
       <div class="tl-dot pending"></div>
@@ -673,6 +693,14 @@
         <li>Part of the Grayson County corridor: Bells (3.50"), Whitewright (1.75"), Sherman</li>
         <li>Morning storms (April 26 AM) &mdash; less than 24 hours before inspection</li>
       </ul>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px dashed rgba(0,33,71,0.15);">
+        <div class="assign-dest">+ Whitewright ISD &mdash; Grayson County</div>
+        <ul class="assign-detail">
+          <li><strong>1:00 PM, Tuesday April 28</strong></li>
+          <li>1.75" hail confirmed downtown Whitewright</li>
+          <li>Adjacent to Tom Bean in the Grayson corridor</li>
+        </ul>
+      </div>
     </div>
     <div class="assign-card derick">
       <div class="assign-name">Derick Dearing</div>
@@ -684,6 +712,13 @@
         <li>Damage reports still developing &mdash; ground-truth needed</li>
         <li>Assess whether Van Zandt warrants full team allocation</li>
       </ul>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px dashed rgba(0,33,71,0.15);">
+        <div class="assign-dest">+ Rains ISD</div>
+        <ul class="assign-detail">
+          <li><strong>1:00 PM, Tuesday April 28</strong></li>
+          <li>East of Van Zandt &mdash; storm path assessment</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -1033,7 +1068,14 @@
   </div>
 
   <div id="prospect-map"></div>
-  <p class="text-sm text-muted">Structures identified from public records. Roof square footage estimates are approximate. Verify on-site.</p>
+
+  <button class="btn-export" onclick="exportList()">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zm-3-7v4H9v-4H6l6-6 6 6h-3z" transform="rotate(180,12,12)"/></svg>
+    Export List (.xlsx)
+  </button>
+  <span class="text-sm text-muted" style="margin-left:8px;">Downloads full prospect list with contacts for Excel</span>
+
+  <p class="text-sm text-muted" style="margin-top:12px;">Structures identified from public records. Phone/email from official directories &mdash; verify before outreach. Roof SF estimates approximate.</p>
 </div>
 
 <!-- ── LOGISTICS ── -->
@@ -1126,114 +1168,114 @@ function openGallery(el) {
   }
 
   var structures = [
-    // ZONE 1 — Tarrant / White Settlement / Lake Worth / Azle (39 structures)
-    {n:"St. Peter the Apostle Catholic Church",a:"1201 S Cherry Ln, White Settlement, TX 76108",lat:32.7408,lng:-97.3925,t:"church",z:1,sf:null},
-    {n:"First Baptist Church of White Settlement",a:"7801 White Settlement Rd, White Settlement, TX 76108",lat:32.7562,lng:-97.3929,t:"church",z:1,sf:null},
-    {n:"Impact Christian Center",a:"414 S Cherry Ln, White Settlement, TX 76108",lat:32.7472,lng:-97.3928,t:"church",z:1,sf:null},
-    {n:"Remi Apartment Homes",a:"704 Dale Ln, White Settlement, TX 76108",lat:32.7505,lng:-97.3875,t:"apartment",z:1,sf:null},
-    {n:"White Settlement Nursing Center",a:"7820 Skyline Park Dr, White Settlement, TX 76108",lat:32.7560,lng:-97.3860,t:"nursing",z:1,sf:null},
-    {n:"West Side Campus of Care",a:"1950 S Las Vegas Trl, White Settlement, TX 76108",lat:32.7335,lng:-97.3965,t:"nursing",z:1,sf:null},
-    {n:"Brewer High School (WSISD)",a:"701 American Flyer Blvd, Fort Worth, TX 76108",lat:32.7603,lng:-97.3752,t:"school",z:1,sf:null},
-    {n:"White Settlement Middle School (WSISD)",a:"1000 S Cherry Ln, White Settlement, TX 76108",lat:32.7425,lng:-97.3928,t:"school",z:1,sf:null},
-    {n:"West Elementary (WSISD)",a:"8901 White Settlement Rd, White Settlement, TX 76108",lat:32.7562,lng:-97.4020,t:"school",z:1,sf:null},
-    {n:"Blue Haze Elementary (WSISD)",a:"601 Blue Haze Dr, Fort Worth, TX 76108",lat:32.7585,lng:-97.3818,t:"school",z:1,sf:null},
-    {n:"North Elementary STEAM Academy (WSISD)",a:"9850 Legacy Dr, Fort Worth, TX 76108",lat:32.7652,lng:-97.4105,t:"school",z:1,sf:null},
-    {n:"Lake Worth High School (LWISD)",a:"4210 Boat Club Rd, Lake Worth, TX 76135",lat:32.7850,lng:-97.4315,t:"school",z:1,sf:null},
-    {n:"Marine Creek Leadership Academy (LWISD)",a:"4801 Huffines Blvd, Fort Worth, TX 76135",lat:32.7885,lng:-97.4262,t:"school",z:1,sf:null},
-    {n:"Effie Morris Early Learning Academy (LWISD)",a:"3801 Merrett Dr, Lake Worth, TX 76135",lat:32.7750,lng:-97.4280,t:"school",z:1,sf:null},
-    {n:"Lake Worth Baptist Church",a:"4445 Hodgkins Rd, Lake Worth, TX 76135",lat:32.7820,lng:-97.4350,t:"church",z:1,sf:null},
-    {n:"Cornerstone Apostolic Church",a:"4300 Williams Spring Rd, Lake Worth, TX 76135",lat:32.7755,lng:-97.4382,t:"church",z:1,sf:null},
-    {n:"Walmart Supercenter — Lake Worth",a:"6360 Lake Worth Blvd, Lake Worth, TX 76135",lat:32.7940,lng:-97.4230,t:"commercial",z:1,sf:180000},
-    {n:"Star Village Commons",a:"3980 Boat Club Rd, Lake Worth, TX 76135",lat:32.7833,lng:-97.4345,t:"commercial",z:1,sf:null},
-    {n:"Lake Worth Center",a:"6200 Lake Worth Blvd, Lake Worth, TX 76135",lat:32.7935,lng:-97.4240,t:"commercial",z:1,sf:null},
-    {n:"First Baptist Church of Azle",a:"1017 Boyd Rd, Azle, TX 76020",lat:32.8900,lng:-97.5425,t:"church",z:1,sf:null},
-    {n:"Holy Trinity Catholic Church",a:"800 High Crest Dr, Azle, TX 76020",lat:32.8960,lng:-97.5315,t:"church",z:1,sf:null},
-    {n:"Crossing Fellowship Community Church",a:"120 E Main St, Azle, TX 76020",lat:32.8948,lng:-97.5428,t:"church",z:1,sf:null},
-    {n:"Ash Creek Baptist Church",a:"300 S Stewart St, Azle, TX 76020",lat:32.8927,lng:-97.5465,t:"church",z:1,sf:null},
-    {n:"Victory Christian Center",a:"737 Boyd Rd, Azle, TX 76020",lat:32.8885,lng:-97.5382,t:"church",z:1,sf:null},
-    {n:"The Church at Azle",a:"1801 S Stewart St, Azle, TX 76020",lat:32.8780,lng:-97.5465,t:"church",z:1,sf:null},
-    {n:"Azle High School",a:"1200 Boyd Rd, Azle, TX 76020",lat:32.8888,lng:-97.5360,t:"school",z:1,sf:null},
-    {n:"Azle Junior High South",a:"201 School St, Azle, TX 76020",lat:32.8935,lng:-97.5430,t:"school",z:1,sf:null},
-    {n:"Cross Timbers Elementary (Azle ISD)",a:"831 Jackson Trl, Azle, TX 76020",lat:32.8820,lng:-97.5520,t:"school",z:1,sf:null},
-    {n:"Hilltop Elementary (Azle ISD)",a:"1622 S Stewart St, Azle, TX 76020",lat:32.8800,lng:-97.5465,t:"school",z:1,sf:null},
-    {n:"Azle Elementary",a:"1200 Lakeview Dr, Azle, TX 76020",lat:32.8905,lng:-97.5282,t:"school",z:1,sf:null},
-    {n:"Azlewood Apartments",a:"1021 Timberoaks Dr, Azle, TX 76020",lat:32.8952,lng:-97.5280,t:"apartment",z:1,sf:null},
-    {n:"Reata West Apartments",a:"1133 Boyd Rd, Azle, TX 76020",lat:32.8895,lng:-97.5340,t:"apartment",z:1,sf:null},
-    {n:"Stafford Place Apartments",a:"1200 SE Pkwy, Azle, TX 76020",lat:32.8870,lng:-97.5230,t:"apartment",z:1,sf:null},
-    {n:"Knoll Creek Apartments",a:"820 Southeast Pkwy, Azle, TX 76020",lat:32.8862,lng:-97.5248,t:"apartment",z:1,sf:null},
-    {n:"Azle Manor Healthcare & Rehabilitation",a:"721 Dunaway Ln, Azle, TX 76020",lat:32.8932,lng:-97.5395,t:"nursing",z:1,sf:null},
-    {n:"Legacy Oaks of Azle Senior Living",a:"1364 Southeast Pkwy, Azle, TX 76020",lat:32.8835,lng:-97.5210,t:"nursing",z:1,sf:null},
-    {n:"Walmart Supercenter — Azle",a:"721 Boyd Rd, Azle, TX 76020",lat:32.8890,lng:-97.5385,t:"commercial",z:1,sf:180000},
-    {n:"Park Place Plaza",a:"600 SE Pkwy, Azle, TX 76020",lat:32.8880,lng:-97.5255,t:"commercial",z:1,sf:28000},
-    {n:"Northwest YMCA",a:"5315 Boat Club Rd, Fort Worth, TX 76135",lat:32.7970,lng:-97.4470,t:"commercial",z:1,sf:null},
+    // ZONE 1 — Tarrant / White Settlement / Lake Worth / Azle (39)
+    {n:"St. Peter the Apostle Catholic Church",a:"1201 S Cherry Ln, White Settlement, TX 76108",lat:32.7408,lng:-97.3925,t:"church",z:1,sf:null,p:"(817) 246-2381",e:"office@stpeterws.org"},
+    {n:"First Baptist Church of White Settlement",a:"7801 White Settlement Rd, White Settlement, TX 76108",lat:32.7562,lng:-97.3929,t:"church",z:1,sf:null,p:"(817) 246-8828",e:null},
+    {n:"Impact Christian Center",a:"414 S Cherry Ln, White Settlement, TX 76108",lat:32.7472,lng:-97.3928,t:"church",z:1,sf:null,p:"(817) 246-7575",e:null},
+    {n:"Remi Apartment Homes",a:"704 Dale Ln, White Settlement, TX 76108",lat:32.7505,lng:-97.3875,t:"apartment",z:1,sf:null,p:"(817) 246-3040",e:null},
+    {n:"White Settlement Nursing Center",a:"7820 Skyline Park Dr, White Settlement, TX 76108",lat:32.7560,lng:-97.3860,t:"nursing",z:1,sf:null,p:"(817) 246-7812",e:null},
+    {n:"West Side Campus of Care",a:"1950 S Las Vegas Trl, White Settlement, TX 76108",lat:32.7335,lng:-97.3965,t:"nursing",z:1,sf:null,p:"(817) 246-4000",e:null},
+    {n:"Brewer High School (WSISD)",a:"701 American Flyer Blvd, Fort Worth, TX 76108",lat:32.7603,lng:-97.3752,t:"school",z:1,sf:null,p:"(817) 367-1200",e:null},
+    {n:"White Settlement Middle School (WSISD)",a:"1000 S Cherry Ln, White Settlement, TX 76108",lat:32.7425,lng:-97.3928,t:"school",z:1,sf:null,p:"(817) 367-1700",e:null},
+    {n:"West Elementary (WSISD)",a:"8901 White Settlement Rd, White Settlement, TX 76108",lat:32.7562,lng:-97.4020,t:"school",z:1,sf:null,p:"(817) 367-1800",e:null},
+    {n:"Blue Haze Elementary (WSISD)",a:"601 Blue Haze Dr, Fort Worth, TX 76108",lat:32.7585,lng:-97.3818,t:"school",z:1,sf:null,p:"(817) 367-1400",e:null},
+    {n:"North Elementary STEAM Academy (WSISD)",a:"9850 Legacy Dr, Fort Worth, TX 76108",lat:32.7652,lng:-97.4105,t:"school",z:1,sf:null,p:"(817) 367-1600",e:null},
+    {n:"Lake Worth High School (LWISD)",a:"4210 Boat Club Rd, Lake Worth, TX 76135",lat:32.7850,lng:-97.4315,t:"school",z:1,sf:null,p:"(817) 306-4600",e:null},
+    {n:"Marine Creek Leadership Academy (LWISD)",a:"4801 Huffines Blvd, Fort Worth, TX 76135",lat:32.7885,lng:-97.4262,t:"school",z:1,sf:null,p:"(817) 306-4700",e:null},
+    {n:"Effie Morris Early Learning Academy (LWISD)",a:"3801 Merrett Dr, Lake Worth, TX 76135",lat:32.7750,lng:-97.4280,t:"school",z:1,sf:null,p:"(817) 306-4900",e:null},
+    {n:"Lake Worth Baptist Church",a:"4445 Hodgkins Rd, Lake Worth, TX 76135",lat:32.7820,lng:-97.4350,t:"church",z:1,sf:null,p:"(817) 237-5516",e:null},
+    {n:"Cornerstone Apostolic Church",a:"4300 Williams Spring Rd, Lake Worth, TX 76135",lat:32.7755,lng:-97.4382,t:"church",z:1,sf:null,p:"(817) 237-7711",e:null},
+    {n:"Walmart Supercenter — Lake Worth",a:"6360 Lake Worth Blvd, Lake Worth, TX 76135",lat:32.7940,lng:-97.4230,t:"commercial",z:1,sf:180000,p:"(817) 237-0791",e:null},
+    {n:"Star Village Commons",a:"3980 Boat Club Rd, Lake Worth, TX 76135",lat:32.7833,lng:-97.4345,t:"commercial",z:1,sf:null,p:null,e:null},
+    {n:"Lake Worth Center",a:"6200 Lake Worth Blvd, Lake Worth, TX 76135",lat:32.7935,lng:-97.4240,t:"commercial",z:1,sf:null,p:null,e:null},
+    {n:"First Baptist Church of Azle",a:"1017 Boyd Rd, Azle, TX 76020",lat:32.8900,lng:-97.5425,t:"church",z:1,sf:null,p:"(817) 444-4547",e:"info@fbcazle.org"},
+    {n:"Holy Trinity Catholic Church",a:"800 High Crest Dr, Azle, TX 76020",lat:32.8960,lng:-97.5315,t:"church",z:1,sf:null,p:"(817) 444-2848",e:null},
+    {n:"Crossing Fellowship Community Church",a:"120 E Main St, Azle, TX 76020",lat:32.8948,lng:-97.5428,t:"church",z:1,sf:null,p:"(817) 444-5833",e:null},
+    {n:"Ash Creek Baptist Church",a:"300 S Stewart St, Azle, TX 76020",lat:32.8927,lng:-97.5465,t:"church",z:1,sf:null,p:"(817) 444-3128",e:null},
+    {n:"Victory Christian Center",a:"737 Boyd Rd, Azle, TX 76020",lat:32.8885,lng:-97.5382,t:"church",z:1,sf:null,p:"(817) 444-8818",e:null},
+    {n:"The Church at Azle",a:"1801 S Stewart St, Azle, TX 76020",lat:32.8780,lng:-97.5465,t:"church",z:1,sf:null,p:"(817) 238-7117",e:null},
+    {n:"Azle High School",a:"1200 Boyd Rd, Azle, TX 76020",lat:32.8888,lng:-97.5360,t:"school",z:1,sf:null,p:"(817) 444-5100",e:null},
+    {n:"Azle Junior High South",a:"201 School St, Azle, TX 76020",lat:32.8935,lng:-97.5430,t:"school",z:1,sf:null,p:"(817) 444-5500",e:null},
+    {n:"Cross Timbers Elementary (Azle ISD)",a:"831 Jackson Trl, Azle, TX 76020",lat:32.8820,lng:-97.5520,t:"school",z:1,sf:null,p:"(817) 444-5700",e:null},
+    {n:"Hilltop Elementary (Azle ISD)",a:"1622 S Stewart St, Azle, TX 76020",lat:32.8800,lng:-97.5465,t:"school",z:1,sf:null,p:"(817) 444-5800",e:null},
+    {n:"Azle Elementary",a:"1200 Lakeview Dr, Azle, TX 76020",lat:32.8905,lng:-97.5282,t:"school",z:1,sf:null,p:"(817) 444-5600",e:null},
+    {n:"Azlewood Apartments",a:"1021 Timberoaks Dr, Azle, TX 76020",lat:32.8952,lng:-97.5280,t:"apartment",z:1,sf:null,p:"(817) 444-6994",e:null},
+    {n:"Reata West Apartments",a:"1133 Boyd Rd, Azle, TX 76020",lat:32.8895,lng:-97.5340,t:"apartment",z:1,sf:null,p:"(817) 444-4500",e:null},
+    {n:"Stafford Place Apartments",a:"1200 SE Pkwy, Azle, TX 76020",lat:32.8870,lng:-97.5230,t:"apartment",z:1,sf:null,p:"(817) 444-0990",e:null},
+    {n:"Knoll Creek Apartments",a:"820 Southeast Pkwy, Azle, TX 76020",lat:32.8862,lng:-97.5248,t:"apartment",z:1,sf:null,p:"(817) 270-2390",e:null},
+    {n:"Azle Manor Healthcare & Rehabilitation",a:"721 Dunaway Ln, Azle, TX 76020",lat:32.8932,lng:-97.5395,t:"nursing",z:1,sf:null,p:"(817) 444-2536",e:null},
+    {n:"Legacy Oaks of Azle Senior Living",a:"1364 Southeast Pkwy, Azle, TX 76020",lat:32.8835,lng:-97.5210,t:"nursing",z:1,sf:null,p:"(817) 752-4600",e:null},
+    {n:"Walmart Supercenter — Azle",a:"721 Boyd Rd, Azle, TX 76020",lat:32.8890,lng:-97.5385,t:"commercial",z:1,sf:180000,p:"(817) 270-5540",e:null},
+    {n:"Park Place Plaza",a:"600 SE Pkwy, Azle, TX 76020",lat:32.8880,lng:-97.5255,t:"commercial",z:1,sf:28000,p:null,e:null},
+    {n:"Northwest YMCA",a:"5315 Boat Club Rd, Fort Worth, TX 76135",lat:32.7970,lng:-97.4470,t:"commercial",z:1,sf:null,p:"(817) 236-8621",e:null},
 
-    // ZONE 2 — Dallas / Cockrell Hill / Duncanville (15 structures)
-    {n:"Cockrell Hill Baptist Church",a:"1128 S Cockrell Hill Rd, Dallas, TX 75211",lat:32.7275,lng:-96.8872,t:"church",z:2,sf:null},
-    {n:"Cockrell Hill United Methodist Church",a:"4031 W Clarendon Dr, Dallas, TX 75211",lat:32.7245,lng:-96.8890,t:"church",z:2,sf:null},
-    {n:"Nuestra Senora del Pilar Catholic Church",a:"4455 W Illinois Ave, Dallas, TX 75211",lat:32.7222,lng:-96.8942,t:"church",z:2,sf:null},
-    {n:"Dallas Baptist University",a:"3000 Mountain Creek Pkwy, Dallas, TX 75211",lat:32.7185,lng:-96.9130,t:"school",z:2,sf:null},
-    {n:"Duncanville High School",a:"900 W Camp Wisdom Rd, Duncanville, TX 75116",lat:32.6520,lng:-96.9080,t:"school",z:2,sf:null},
-    {n:"First Baptist Church of Duncanville",a:"323 W Wheatland Rd, Duncanville, TX 75116",lat:32.6460,lng:-96.9115,t:"church",z:2,sf:null},
-    {n:"First Christian Church of Duncanville",a:"203 S Main St, Duncanville, TX 75116",lat:32.6512,lng:-96.9083,t:"church",z:2,sf:null},
-    {n:"First Presbyterian Church of Duncanville",a:"543 E Freeman St, Duncanville, TX 75116",lat:32.6530,lng:-96.9030,t:"church",z:2,sf:null},
-    {n:"Church of Jesus Christ of LDS — Duncanville",a:"1019 Big Stone Gap Rd, Duncanville, TX 75137",lat:32.6380,lng:-96.9135,t:"church",z:2,sf:null},
-    {n:"The Alona Apartments",a:"1531 Duncanville Rd, Dallas, TX 75211",lat:32.7148,lng:-96.9055,t:"apartment",z:2,sf:null},
-    {n:"Sierra Nevada Apartments",a:"5324 Preakness Ln, Dallas, TX 75211",lat:32.7120,lng:-96.9082,t:"apartment",z:2,sf:null},
-    {n:"The Abbott Apartments",a:"4599 W Davis St, Dallas, TX 75211",lat:32.7310,lng:-96.8985,t:"apartment",z:2,sf:null},
-    {n:"Mountain Ridge Apartments",a:"2626 Duncanville Rd, Dallas, TX 75211",lat:32.7048,lng:-96.9080,t:"apartment",z:2,sf:null},
-    {n:"Westmoreland Station Apartments",a:"2700 S Westmoreland Rd, Dallas, TX 75233",lat:32.7100,lng:-96.8820,t:"apartment",z:2,sf:null},
-    {n:"Hart House Apartments",a:"1239 Hartsdale Dr, Dallas, TX 75211",lat:32.7180,lng:-96.8965,t:"apartment",z:2,sf:null},
+    // ZONE 2 — Dallas / Cockrell Hill / Duncanville (15)
+    {n:"Cockrell Hill Baptist Church",a:"1128 S Cockrell Hill Rd, Dallas, TX 75211",lat:32.7275,lng:-96.8872,t:"church",z:2,sf:null,p:"(214) 330-4855",e:null},
+    {n:"Cockrell Hill United Methodist Church",a:"4031 W Clarendon Dr, Dallas, TX 75211",lat:32.7245,lng:-96.8890,t:"church",z:2,sf:null,p:"(214) 337-2429",e:null},
+    {n:"Nuestra Senora del Pilar Catholic Church",a:"4455 W Illinois Ave, Dallas, TX 75211",lat:32.7222,lng:-96.8942,t:"church",z:2,sf:null,p:"(214) 339-2833",e:null},
+    {n:"Dallas Baptist University",a:"3000 Mountain Creek Pkwy, Dallas, TX 75211",lat:32.7185,lng:-96.9130,t:"school",z:2,sf:null,p:"(214) 333-7100",e:"admiss@dbu.edu"},
+    {n:"Duncanville High School",a:"900 W Camp Wisdom Rd, Duncanville, TX 75116",lat:32.6520,lng:-96.9080,t:"school",z:2,sf:null,p:"(972) 708-2700",e:null},
+    {n:"First Baptist Church of Duncanville",a:"323 W Wheatland Rd, Duncanville, TX 75116",lat:32.6460,lng:-96.9115,t:"church",z:2,sf:null,p:"(972) 298-3043",e:"info@fbcduncanville.org"},
+    {n:"First Christian Church of Duncanville",a:"203 S Main St, Duncanville, TX 75116",lat:32.6512,lng:-96.9083,t:"church",z:2,sf:null,p:"(972) 298-4841",e:null},
+    {n:"First Presbyterian Church of Duncanville",a:"543 E Freeman St, Duncanville, TX 75116",lat:32.6530,lng:-96.9030,t:"church",z:2,sf:null,p:null,e:null},
+    {n:"Church of Jesus Christ of LDS — Duncanville",a:"1019 Big Stone Gap Rd, Duncanville, TX 75137",lat:32.6380,lng:-96.9135,t:"church",z:2,sf:null,p:null,e:null},
+    {n:"The Alona Apartments",a:"1531 Duncanville Rd, Dallas, TX 75211",lat:32.7148,lng:-96.9055,t:"apartment",z:2,sf:null,p:null,e:null},
+    {n:"Sierra Nevada Apartments",a:"5324 Preakness Ln, Dallas, TX 75211",lat:32.7120,lng:-96.9082,t:"apartment",z:2,sf:null,p:null,e:null},
+    {n:"The Abbott Apartments",a:"4599 W Davis St, Dallas, TX 75211",lat:32.7310,lng:-96.8985,t:"apartment",z:2,sf:null,p:null,e:null},
+    {n:"Mountain Ridge Apartments",a:"2626 Duncanville Rd, Dallas, TX 75211",lat:32.7048,lng:-96.9080,t:"apartment",z:2,sf:null,p:null,e:null},
+    {n:"Westmoreland Station Apartments",a:"2700 S Westmoreland Rd, Dallas, TX 75233",lat:32.7100,lng:-96.8820,t:"apartment",z:2,sf:null,p:null,e:null},
+    {n:"Hart House Apartments",a:"1239 Hartsdale Dr, Dallas, TX 75211",lat:32.7180,lng:-96.8965,t:"apartment",z:2,sf:null,p:null,e:null},
 
-    // ZONE 3 — Parker County / Springtown / Weatherford / Aledo (19 structures)
-    {n:"First Baptist Church of Springtown",a:"550 N Main St, Springtown, TX 76082",lat:32.9705,lng:-97.6835,t:"church",z:3,sf:null},
-    {n:"Hilltop Family Church",a:"1227 Cottondale Rd, Springtown, TX 76082",lat:32.9620,lng:-97.6690,t:"church",z:3,sf:null},
-    {n:"Cornerstone Community Church",a:"2233 E Hwy 199, Springtown, TX 76082",lat:32.9668,lng:-97.6600,t:"church",z:3,sf:null},
-    {n:"Legacy Church",a:"3591 E Hwy 199, Springtown, TX 76082",lat:32.9640,lng:-97.6450,t:"church",z:3,sf:null},
-    {n:"GracePointe Church",a:"4110 E Hwy 199, Springtown, TX 76082",lat:32.9635,lng:-97.6380,t:"church",z:3,sf:null},
-    {n:"Springtown High School",a:"915 W Hwy 199, Springtown, TX 76082",lat:32.9658,lng:-97.6920,t:"school",z:3,sf:null},
-    {n:"Springtown Intermediate School",a:"300 Pojo Dr, Springtown, TX 76082",lat:32.9628,lng:-97.6870,t:"school",z:3,sf:null},
-    {n:"Springtown Elementary School",a:"416 E Third St, Springtown, TX 76082",lat:32.9695,lng:-97.6800,t:"school",z:3,sf:null},
-    {n:"Goshen Creek Elementary (Springtown ISD)",a:"400 S Pojo Dr, Springtown, TX 76082",lat:32.9615,lng:-97.6870,t:"school",z:3,sf:null},
-    {n:"Weatherford High School",a:"2121 Bethel Rd, Weatherford, TX 76087",lat:32.7475,lng:-97.7720,t:"school",z:3,sf:null},
-    {n:"Joe M. Tison Middle School (Weatherford ISD)",a:"102 Meadowview Rd, Weatherford, TX 76087",lat:32.7510,lng:-97.7690,t:"school",z:3,sf:null},
-    {n:"First Baptist Church of Weatherford",a:"222 W Church St, Weatherford, TX 76086",lat:32.7590,lng:-97.7975,t:"church",z:3,sf:null},
-    {n:"All Saints Church — Weatherford",a:"121 S Waco St, Weatherford, TX 76086",lat:32.7575,lng:-97.7970,t:"church",z:3,sf:null},
-    {n:"Aledo High School",a:"1000 Bailey Ranch Rd, Aledo, TX 76008",lat:32.6960,lng:-97.6095,t:"school",z:3,sf:null},
-    {n:"Aledo Middle School",a:"416 FM 1187 S, Aledo, TX 76008",lat:32.6890,lng:-97.6040,t:"school",z:3,sf:null},
-    {n:"Stuard Elementary (Aledo ISD)",a:"200 Thunderhead Ln, Aledo, TX 76008",lat:32.7020,lng:-97.6150,t:"school",z:3,sf:null},
-    {n:"Coder Elementary (Aledo ISD)",a:"12 Vernon Rd, Aledo, TX 76008",lat:32.6980,lng:-97.6020,t:"school",z:3,sf:null},
-    {n:"Aledo United Methodist Church",a:"100 Pecan Dr, Aledo, TX 76008",lat:32.6950,lng:-97.6000,t:"church",z:3,sf:null},
-    {n:"Holy Redeemer Catholic Parish",a:"16250 Old Weatherford Rd, Aledo, TX 76008",lat:32.7050,lng:-97.6285,t:"church",z:3,sf:null},
+    // ZONE 3 — Parker County / Springtown / Weatherford / Aledo (19)
+    {n:"First Baptist Church of Springtown",a:"550 N Main St, Springtown, TX 76082",lat:32.9705,lng:-97.6835,t:"church",z:3,sf:null,p:"(817) 523-7828",e:"info@fbcspringtown.com"},
+    {n:"Hilltop Family Church",a:"1227 Cottondale Rd, Springtown, TX 76082",lat:32.9620,lng:-97.6690,t:"church",z:3,sf:null,p:"(817) 220-7177",e:null},
+    {n:"Cornerstone Community Church",a:"2233 E Hwy 199, Springtown, TX 76082",lat:32.9668,lng:-97.6600,t:"church",z:3,sf:null,p:"(817) 523-5970",e:null},
+    {n:"Legacy Church",a:"3591 E Hwy 199, Springtown, TX 76082",lat:32.9640,lng:-97.6450,t:"church",z:3,sf:null,p:"(817) 523-7775",e:null},
+    {n:"GracePointe Church",a:"4110 E Hwy 199, Springtown, TX 76082",lat:32.9635,lng:-97.6380,t:"church",z:3,sf:null,p:"(817) 220-7177",e:null},
+    {n:"Springtown High School",a:"915 W Hwy 199, Springtown, TX 76082",lat:32.9658,lng:-97.6920,t:"school",z:3,sf:null,p:"(817) 220-1418",e:null},
+    {n:"Springtown Intermediate School",a:"300 Pojo Dr, Springtown, TX 76082",lat:32.9628,lng:-97.6870,t:"school",z:3,sf:null,p:"(817) 220-5580",e:null},
+    {n:"Springtown Elementary School",a:"416 E Third St, Springtown, TX 76082",lat:32.9695,lng:-97.6800,t:"school",z:3,sf:null,p:"(817) 220-1434",e:null},
+    {n:"Goshen Creek Elementary (Springtown ISD)",a:"400 S Pojo Dr, Springtown, TX 76082",lat:32.9615,lng:-97.6870,t:"school",z:3,sf:null,p:"(817) 220-5520",e:null},
+    {n:"Weatherford High School",a:"2121 Bethel Rd, Weatherford, TX 76087",lat:32.7475,lng:-97.7720,t:"school",z:3,sf:null,p:"(817) 598-2820",e:null},
+    {n:"Joe M. Tison Middle School (Weatherford ISD)",a:"102 Meadowview Rd, Weatherford, TX 76087",lat:32.7510,lng:-97.7690,t:"school",z:3,sf:null,p:"(817) 598-2850",e:null},
+    {n:"First Baptist Church of Weatherford",a:"222 W Church St, Weatherford, TX 76086",lat:32.7590,lng:-97.7975,t:"church",z:3,sf:null,p:"(817) 596-0845",e:"info@fbcw.org"},
+    {n:"All Saints Church — Weatherford",a:"121 S Waco St, Weatherford, TX 76086",lat:32.7575,lng:-97.7970,t:"church",z:3,sf:null,p:"(817) 599-1459",e:null},
+    {n:"Aledo High School",a:"1000 Bailey Ranch Rd, Aledo, TX 76008",lat:32.6960,lng:-97.6095,t:"school",z:3,sf:null,p:"(817) 441-8227",e:null},
+    {n:"Aledo Middle School",a:"416 FM 1187 S, Aledo, TX 76008",lat:32.6890,lng:-97.6040,t:"school",z:3,sf:null,p:"(817) 441-8329",e:null},
+    {n:"Stuard Elementary (Aledo ISD)",a:"200 Thunderhead Ln, Aledo, TX 76008",lat:32.7020,lng:-97.6150,t:"school",z:3,sf:null,p:"(817) 441-1004",e:null},
+    {n:"Coder Elementary (Aledo ISD)",a:"12 Vernon Rd, Aledo, TX 76008",lat:32.6980,lng:-97.6020,t:"school",z:3,sf:null,p:"(817) 441-7661",e:null},
+    {n:"Aledo United Methodist Church",a:"100 Pecan Dr, Aledo, TX 76008",lat:32.6950,lng:-97.6000,t:"church",z:3,sf:null,p:"(817) 441-8329",e:"info@aledoumc.org"},
+    {n:"Holy Redeemer Catholic Parish",a:"16250 Old Weatherford Rd, Aledo, TX 76008",lat:32.7050,lng:-97.6285,t:"church",z:3,sf:null,p:"(817) 441-3500",e:"office@hrca.org"},
 
-    // ZONE 4 — Grayson County / Bells / Tom Bean / Whitewright / Sherman (17 structures)
-    {n:"First Baptist Church of Bells",a:"121 S Pecan St, Bells, TX 75414",lat:33.6110,lng:-96.4120,t:"church",z:4,sf:null},
-    {n:"Bells United Methodist Church",a:"301 S Pecan St, Bells, TX 75414",lat:33.6095,lng:-96.4120,t:"church",z:4,sf:null},
-    {n:"Bells High School",a:"1500 Ole Ambrose Rd, Bells, TX 75414",lat:33.6060,lng:-96.4220,t:"school",z:4,sf:null},
-    {n:"Bells Elementary School",a:"110 Scott Rd, Bells, TX 75414",lat:33.6125,lng:-96.4150,t:"school",z:4,sf:null},
-    {n:"Pritchard Junior High (Bells ISD)",a:"1510 N Ole Ambrose Rd, Bells, TX 75414",lat:33.6065,lng:-96.4225,t:"school",z:4,sf:null},
-    {n:"Tom Bean High School",a:"7719 State Hwy 11, Tom Bean, TX 75489",lat:33.5175,lng:-96.4790,t:"school",z:4,sf:null},
-    {n:"Tom Bean Elementary School",a:"105 Eubanks St, Tom Bean, TX 75489",lat:33.5205,lng:-96.4830,t:"school",z:4,sf:null},
-    {n:"Tom Bean Middle School",a:"289 Franklin Rd, Tom Bean, TX 75489",lat:33.5190,lng:-96.4810,t:"school",z:4,sf:null},
-    {n:"First Baptist Church Tom Bean",a:"101 S Britton St, Tom Bean, TX 75489",lat:33.5215,lng:-96.4840,t:"church",z:4,sf:null},
-    {n:"Whitewright High School",a:"304 Echols Ln, Whitewright, TX 75491",lat:33.5150,lng:-96.3920,t:"school",z:4,sf:null},
-    {n:"Whitewright Elementary School",a:"305 Highland Dr, Whitewright, TX 75491",lat:33.5135,lng:-96.3935,t:"school",z:4,sf:null},
-    {n:"First Methodist Church of Whitewright",a:"305 S Maple St, Whitewright, TX 75491",lat:33.5125,lng:-96.3942,t:"church",z:4,sf:null},
-    {n:"Sherman High School",a:"2201 E Lamar St, Sherman, TX 75092",lat:33.6285,lng:-96.5855,t:"school",z:4,sf:null},
-    {n:"Austin College",a:"900 N Grand Ave, Sherman, TX 75090",lat:33.6465,lng:-96.6090,t:"school",z:4,sf:null},
-    {n:"First Baptist Church of Sherman",a:"400 S Travis St, Sherman, TX 75090",lat:33.6330,lng:-96.6085,t:"church",z:4,sf:null},
-    {n:"Traditions Senior Living & Memory Care",a:"505 N FM 1417, Sherman, TX 75092",lat:33.6480,lng:-96.5830,t:"nursing",z:4,sf:null},
-    {n:"Renaissance Senior Living — Sherman",a:"3701 Loy Lake Rd, Sherman, TX 75090",lat:33.6212,lng:-96.6255,t:"nursing",z:4,sf:null},
+    // ZONE 4 — Grayson County / Bells / Tom Bean / Whitewright / Sherman (17)
+    {n:"First Baptist Church of Bells",a:"121 S Pecan St, Bells, TX 75414",lat:33.6110,lng:-96.4120,t:"church",z:4,sf:null,p:"(903) 965-4813",e:"pastor@fbcbellstx.org"},
+    {n:"Bells United Methodist Church",a:"301 S Pecan St, Bells, TX 75414",lat:33.6095,lng:-96.4120,t:"church",z:4,sf:null,p:"(903) 965-4861",e:null},
+    {n:"Bells High School",a:"1500 Ole Ambrose Rd, Bells, TX 75414",lat:33.6060,lng:-96.4220,t:"school",z:4,sf:null,p:"(903) 965-3603",e:"josh.weger@bellsisd.net"},
+    {n:"Bells Elementary School",a:"110 Scott Rd, Bells, TX 75414",lat:33.6125,lng:-96.4150,t:"school",z:4,sf:null,p:"(903) 965-3601",e:"kerry.harlan@bellsisd.net"},
+    {n:"Pritchard Junior High (Bells ISD)",a:"1510 N Ole Ambrose Rd, Bells, TX 75414",lat:33.6065,lng:-96.4225,t:"school",z:4,sf:null,p:"(903) 965-3602",e:"wmsteger@bellsisd.net"},
+    {n:"Tom Bean High School",a:"7719 State Hwy 11, Tom Bean, TX 75489",lat:33.5175,lng:-96.4790,t:"school",z:4,sf:null,p:"(903) 546-6319",e:null},
+    {n:"Tom Bean Elementary School",a:"105 Eubanks St, Tom Bean, TX 75489",lat:33.5205,lng:-96.4830,t:"school",z:4,sf:null,p:"(903) 546-6333",e:"patrice.counts@tbisd.org"},
+    {n:"Tom Bean Middle School",a:"289 Franklin Rd, Tom Bean, TX 75489",lat:33.5190,lng:-96.4810,t:"school",z:4,sf:null,p:"(903) 546-6161",e:"steve.goodman@tbisd.org"},
+    {n:"First Baptist Church Tom Bean",a:"101 S Britton St, Tom Bean, TX 75489",lat:33.5215,lng:-96.4840,t:"church",z:4,sf:null,p:"(903) 546-6231",e:"info@fbctombean.com"},
+    {n:"Whitewright High School",a:"304 Echols Ln, Whitewright, TX 75491",lat:33.5150,lng:-96.3920,t:"school",z:4,sf:null,p:"(903) 364-2155",e:"chad.long@wwisd.com"},
+    {n:"Whitewright Elementary School",a:"305 Highland Dr, Whitewright, TX 75491",lat:33.5135,lng:-96.3935,t:"school",z:4,sf:null,p:"(903) 364-2424",e:"allyson.price@wwisd.com"},
+    {n:"First Methodist Church of Whitewright",a:"305 S Maple St, Whitewright, TX 75491",lat:33.5125,lng:-96.3942,t:"church",z:4,sf:null,p:"(903) 364-2411",e:"wwfumc@gmail.com"},
+    {n:"Sherman High School",a:"2201 E Lamar St, Sherman, TX 75092",lat:33.6285,lng:-96.5855,t:"school",z:4,sf:null,p:"(903) 891-6440",e:"shermanhigh@shermanisd.net"},
+    {n:"Austin College",a:"900 N Grand Ave, Sherman, TX 75090",lat:33.6465,lng:-96.6090,t:"school",z:4,sf:null,p:"(903) 813-2000",e:"admission@austincollege.edu"},
+    {n:"First Baptist Church of Sherman",a:"400 S Travis St, Sherman, TX 75090",lat:33.6330,lng:-96.6085,t:"church",z:4,sf:null,p:"(903) 892-9121",e:"comments@fbcsherman.org"},
+    {n:"Traditions Senior Living & Memory Care",a:"505 N FM 1417, Sherman, TX 75092",lat:33.6480,lng:-96.5830,t:"nursing",z:4,sf:null,p:"(903) 893-4280",e:"dara@traditionstx.com"},
+    {n:"Renaissance Senior Living — Sherman",a:"3701 Loy Lake Rd, Sherman, TX 75090",lat:33.6212,lng:-96.6255,t:"nursing",z:4,sf:null,p:"(903) 868-2200",e:null},
 
-    // ZONE 5 — Wise County / Runaway Bay / Bridgeport (9 structures)
-    {n:"Runaway Bay Community Church (The Bay)",a:"20 Runaway Bay Dr, Runaway Bay, TX 76426",lat:33.1678,lng:-97.8750,t:"church",z:5,sf:null},
-    {n:"City of Runaway Bay City Hall",a:"101 Runaway Bay Dr, Runaway Bay, TX 76426",lat:33.1680,lng:-97.8755,t:"government",z:5,sf:null},
-    {n:"Bridgeport Intermediate School",a:"1400 Hwy 380, Bridgeport, TX 76426",lat:33.2100,lng:-97.7545,t:"school",z:5,sf:null},
-    {n:"Bridgeport ISD / High School",a:"2107 15th St, Bridgeport, TX 76426",lat:33.2115,lng:-97.7580,t:"school",z:5,sf:null},
-    {n:"The Club at Runaway Bay (Golf Course)",a:"800 Lakeshore Dr, Runaway Bay, TX 76426",lat:33.1620,lng:-97.8700,t:"commercial",z:5,sf:null},
-    {n:"Bay Landing RV Campground",a:"3901 Tin Top Rd, Runaway Bay, TX 76426",lat:33.1750,lng:-97.8650,t:"commercial",z:5,sf:null},
-    {n:"First Baptist Church of Bridgeport",a:"1204 12th St, Bridgeport, TX 76426",lat:33.2105,lng:-97.7555,t:"church",z:5,sf:null},
-    {n:"Senior Care Health & Rehabilitation Center",a:"2108 15th St, Bridgeport, TX 76426",lat:33.2118,lng:-97.7580,t:"nursing",z:5,sf:null},
-    {n:"Walmart Supercenter — Bridgeport",a:"1105 5th St, Bridgeport, TX 76426",lat:33.2060,lng:-97.7535,t:"commercial",z:5,sf:150000}
+    // ZONE 5 — Wise County / Runaway Bay / Bridgeport (9)
+    {n:"Runaway Bay Community Church (The Bay)",a:"20 Runaway Bay Dr, Runaway Bay, TX 76426",lat:33.1678,lng:-97.8750,t:"church",z:5,sf:null,p:"(940) 575-2512",e:"rbccyouthgroup@gmail.com"},
+    {n:"City of Runaway Bay City Hall",a:"101 Runaway Bay Dr, Runaway Bay, TX 76426",lat:33.1680,lng:-97.8755,t:"government",z:5,sf:null,p:"(940) 575-4745",e:"rabcitysecretary@runawaybaytexas.com"},
+    {n:"Bridgeport Intermediate School",a:"1400 Hwy 380, Bridgeport, TX 76426",lat:33.2100,lng:-97.7545,t:"school",z:5,sf:null,p:"(940) 683-5784",e:null},
+    {n:"Bridgeport ISD / High School",a:"2107 15th St, Bridgeport, TX 76426",lat:33.2115,lng:-97.7580,t:"school",z:5,sf:null,p:"(940) 683-4064",e:"ldavis@bridgeportisd.net"},
+    {n:"The Club at Runaway Bay (Golf Course)",a:"800 Lakeshore Dr, Runaway Bay, TX 76426",lat:33.1620,lng:-97.8700,t:"commercial",z:5,sf:null,p:"(940) 575-2225",e:"angela@runawaybay.com"},
+    {n:"Bay Landing RV Campground",a:"3901 Tin Top Rd, Runaway Bay, TX 76426",lat:33.1750,lng:-97.8650,t:"commercial",z:5,sf:null,p:"(940) 683-3016",e:null},
+    {n:"First Baptist Church of Bridgeport",a:"1204 12th St, Bridgeport, TX 76426",lat:33.2105,lng:-97.7555,t:"church",z:5,sf:null,p:"(940) 683-4037",e:null},
+    {n:"Senior Care Health & Rehabilitation Center",a:"2108 15th St, Bridgeport, TX 76426",lat:33.2118,lng:-97.7580,t:"nursing",z:5,sf:null,p:"(940) 683-5023",e:"info@bridgeportmedicallodge.com"},
+    {n:"Walmart Supercenter — Bridgeport",a:"1105 5th St, Bridgeport, TX 76426",lat:33.2060,lng:-97.7535,t:"commercial",z:5,sf:150000,p:"(940) 627-5546",e:null}
   ];
 
   var clusters = L.markerClusterGroup({
@@ -1259,15 +1301,19 @@ function openGallery(el) {
   structures.forEach(function(s){
     var m = L.marker([s.lat,s.lng],{icon:makeIcon(s.t)});
     var sqft = s.sf ? s.sf.toLocaleString()+' SF (est.)' : 'TBD';
+    var phone = s.p ? '<div style="font-size:0.75rem;margin-top:4px;"><strong>Ph:</strong> <a href="tel:'+s.p.replace(/[^0-9+]/g,'')+'" style="color:#002147;">'+s.p+'</a></div>' : '';
+    var email = s.e ? '<div style="font-size:0.75rem;"><strong>Email:</strong> <a href="mailto:'+s.e+'" style="color:#002147;word-break:break-all;">'+s.e+'</a></div>' : '';
+    var noContact = (!s.p && !s.e) ? '<div style="font-size:0.7rem;color:#999;margin-top:4px;font-style:italic;">Contact info not yet confirmed</div>' : '';
     m.bindPopup(
-      '<div style="font-family:Montserrat,sans-serif;min-width:200px;">'+
+      '<div style="font-family:Montserrat,sans-serif;min-width:220px;">'+
       '<div style="font-weight:700;font-size:0.85rem;color:#002147;margin-bottom:4px;">'+s.n+'</div>'+
       '<div style="font-size:0.75rem;color:#666;margin-bottom:6px;">'+s.a+'</div>'+
       '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;">'+
       '<span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:2px 6px;border-radius:3px;background:'+(colors[s.t]||'#666')+'20;color:'+(colors[s.t]||'#666')+';">'+typeLabels[s.t]+'</span>'+
       '<span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:2px 6px;border-radius:3px;background:#f0f0f0;color:#555;">Zone '+s.z+'</span>'+
       '</div>'+
-      '<div style="font-size:0.75rem;"><strong>Est. Roof:</strong> '+sqft+'</div>'+
+      phone+email+noContact+
+      '<div style="font-size:0.75rem;margin-top:4px;"><strong>Est. Roof:</strong> '+sqft+'</div>'+
       '<div style="font-size:0.7rem;color:#888;margin-top:4px;">'+zoneNames[s.z]+'</div>'+
       '</div>'
     );
@@ -1289,7 +1335,38 @@ function openGallery(el) {
   zones.forEach(function(z){
     L.circle([z.lat,z.lng],{radius:z.r,color:z.c,fillColor:z.c,fillOpacity:0.08,weight:1.5,dashArray:'5,5'}).addTo(map).bindTooltip(z.l,{permanent:false,direction:'top'});
   });
+  window._prospectData = structures;
+  window._typeLabels = typeLabels;
+  window._zoneNames = zoneNames;
 })();
+</script>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script>
+function exportList(){
+  var S = window._prospectData;
+  var TL = window._typeLabels;
+  var ZN = window._zoneNames;
+  var rows = S.map(function(s){
+    return {
+      'Name': s.n,
+      'Type': TL[s.t]||s.t,
+      'Address': s.a,
+      'Phone': s.p||'',
+      'Email': s.e||'',
+      'Zone': s.z,
+      'Zone Description': ZN[s.z]||'',
+      'Est. Roof SF': s.sf||'',
+      'Latitude': s.lat,
+      'Longitude': s.lng
+    };
+  });
+  var ws = XLSX.utils.json_to_sheet(rows);
+  ws['!cols'] = [{wch:42},{wch:20},{wch:48},{wch:16},{wch:32},{wch:6},{wch:30},{wch:14},{wch:10},{wch:10}];
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Prospect Structures');
+  XLSX.writeFile(wb, 'JC_Prospect_Structures_042526.xlsx');
+}
 </script>
 
 </body>
