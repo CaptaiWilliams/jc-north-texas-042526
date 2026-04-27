@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justice Claims — Advance Operations Brief | April 25–26, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap');
+
+  :root {
+    --navy: #002147;
+    --orange: #D6492A;
+    --gray: #AAABAC;
+    --light-gray: #F4F5F6;
+    --dark-gray: #2C2C2C;
+    --white: #FFFFFF;
+    --navy-10: rgba(0, 33, 71, 0.08);
+    --orange-10: rgba(214, 73, 42, 0.08);
+    --green: #1B7340;
+    --green-10: rgba(27, 115, 64, 0.08);
+    --amber: #B8860B;
+    --amber-10: rgba(184, 134, 11, 0.08);
+    --red: #C0392B;
+    --red-10: rgba(192, 57, 43, 0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--dark-gray);
+    background: var(--light-gray);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, #001533 100%);
+    color: var(--white);
+    padding: 40px 24px 32px;
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange), var(--orange) 40%, transparent);
+  }
+  .header-badge {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+  .header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: var(--orange); }
+  .header-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  .header-meta {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .header-meta-item {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    background: rgba(255,255,255,0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    background: var(--white);
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    text-decoration: none;
+    padding: 14px 12px;
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav a:hover, .nav a:focus { color: var(--navy); border-bottom-color: var(--orange); }
+
+  /* ── MAIN ── */
+  .main { max-width: 900px; margin: 0 auto; padding: 24px 16px 80px; }
+
+  /* ── SECTION ── */
+  .section {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .section h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--navy);
+    margin: 20px 0 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--light-gray);
+  }
+  .section h3:first-of-type { border-top: none; padding-top: 0; margin-top: 8px; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 28px; margin: 16px 0; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 4px; bottom: 4px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--orange), var(--navy));
+    border-radius: 1px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: -24px; top: 4px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--orange);
+    background: var(--orange);
+  }
+  .tl-dot.active { background: var(--orange); animation: pulse 2s infinite; }
+  .tl-dot.pending { background: var(--white); }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 2px var(--orange); }
+    50% { box-shadow: 0 0 0 6px rgba(214,73,42,0.2); }
+  }
+  .tl-time {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--orange);
+    margin-bottom: 2px;
+  }
+  .tl-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--navy);
+  }
+  .tl-desc {
+    font-size: 0.88rem;
+    color: #555;
+    margin-top: 2px;
+  }
+
+  /* ── ASSIGNMENT CARDS ── */
+  .assign-grid { display: grid; gap: 16px; margin: 16px 0; }
+  @media (min-width: 600px) { .assign-grid.cols-2 { grid-template-columns: 1fr 1fr; } }
+  .assign-card {
+    border: 2px solid var(--navy-10);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .assign-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .assign-card.matt::before { background: var(--orange); }
+  .assign-card.derick::before { background: var(--navy); }
+  .assign-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--navy);
+  }
+  .assign-role {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+  .assign-dest {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+  .assign-detail {
+    font-size: 0.85rem;
+    color: #555;
+  }
+  .assign-detail li { margin-bottom: 4px; }
+
+  /* ── TEAM CARDS ── */
+  .team-card {
+    border: 2px solid var(--navy-10);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .team-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+  }
+  .team-card.t1::before { background: var(--orange); }
+  .team-card.t2::before { background: var(--navy); }
+  .team-card.t3::before { background: #7B2D8E; }
+  .team-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .team-card.t1 .team-num { color: var(--orange); }
+  .team-card.t2 .team-num { color: var(--navy); }
+  .team-card.t3 .team-num { color: #7B2D8E; }
+  .team-aor {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .team-why {
+    font-size: 0.88rem;
+    color: #555;
+    margin-bottom: 12px;
+  }
+
+  /* ── TAG SYSTEM ── */
+  .tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 4px;
+  }
+  .tag-critical { background: var(--red-10); color: var(--red); }
+  .tag-high { background: var(--orange-10); color: var(--orange); }
+  .tag-confirmed { background: var(--green-10); color: var(--green); }
+  .tag-pending { background: var(--amber-10); color: var(--amber); }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.85rem;
+  }
+  th {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--navy);
+    background: var(--light-gray);
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--navy-10);
+  }
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* ── ALERT BOX ── */
+  .alert {
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 14px 0;
+    font-size: 0.88rem;
+  }
+  .alert-warn {
+    background: var(--amber-10);
+    border-left: 4px solid var(--amber);
+  }
+  .alert-danger {
+    background: var(--red-10);
+    border-left: 4px solid var(--red);
+  }
+  .alert-info {
+    background: var(--navy-10);
+    border-left: 4px solid var(--navy);
+  }
+  .alert-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    margin-bottom: 4px;
+  }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .stat-box {
+    text-align: center;
+    padding: 14px 8px;
+    background: var(--light-gray);
+    border-radius: 8px;
+  }
+  .stat-val {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .stat-val.orange { color: var(--orange); }
+  .stat-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; margin: 12px 0; }
+  .checklist li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+  }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 4px;
+    width: 16px; height: 16px;
+    border: 2px solid var(--gray);
+    border-radius: 3px;
+  }
+
+  /* ── LINKS ── */
+  a { color: var(--orange); text-decoration: none; font-weight: 500; }
+  a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 32px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    color: var(--gray);
+  }
+  .footer strong { color: var(--navy); }
+
+  /* ── UTILITY ── */
+  .mb-0 { margin-bottom: 0; }
+  .text-sm { font-size: 0.82rem; }
+  .text-muted { color: var(--gray); }
+  .mono {
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 0.82rem;
+    background: var(--light-gray);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; }
+    .nav { display: none; }
+    .section { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    .header { min-height: auto; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<div class="header">
+  <div class="header-badge">Justice Claims Public Adjusting</div>
+  <h1>Advance Operations <span>Brief</span></h1>
+  <div class="header-sub">April 25&ndash;26, 2026 &mdash; North Texas Hail &amp; Wind Event</div>
+  <div class="header-meta">
+    <span class="header-meta-item">Prepared: April 27, 2026</span>
+    <span class="header-meta-item">Classification: Internal &mdash; Team Distribution</span>
+    <span class="header-meta-item">Status: Phase 1 &mdash; Advance Recon</span>
+  </div>
+</div>
+
+<!-- ════ NAV ════ -->
+<div class="nav">
+  <a href="#timeline">Timeline</a>
+  <a href="#advance">Advance Team</a>
+  <a href="#storm">Storm Intel</a>
+  <a href="#contacts">Contacts</a>
+  <a href="#teams">3-Team Plan</a>
+  <a href="#field">Field Intel</a>
+  <a href="#logistics">Logistics</a>
+</div>
+
+<!-- ════ MAIN ════ -->
+<div class="main">
+
+<!-- ── SITUATION ── -->
+<div class="section">
+  <div class="section-label">Situation</div>
+  <h2>Event Summary</h2>
+  <p>On the evening of April 25 into the early hours of April 26, 2026, a severe weather outbreak impacted a wide corridor of North Texas from Archer County through the DFW Metroplex and into Grayson/Fannin Counties. The event produced confirmed tornadoes, widespread destructive hail up to 4.00", and straight-line winds up to 89 mph. Two fatalities, six injuries, and three disaster declarations have been confirmed.</p>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-val orange">4.00"</div>
+      <div class="stat-label">Max Hail (Trenton)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">EF-2</div>
+      <div class="stat-label">Max Tornado (Runaway Bay)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">139K</div>
+      <div class="stat-label">Properties 1.75"+</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val orange">3</div>
+      <div class="stat-label">Disaster Declarations</div>
+    </div>
+  </div>
+
+  <p class="text-sm text-muted">Full storm data, interactive map, and photo documentation available in the <a href="index.html">Executive Deployment Report</a>.</p>
+</div>
+
+<!-- ── TIMELINE ── -->
+<div class="section" id="timeline">
+  <div class="section-label">Operations Timeline</div>
+  <h2>Deployment Phases</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot active"></div>
+      <div class="tl-time">Sunday, April 27 &mdash; Evening</div>
+      <div class="tl-title">Phase 1: Advance Recon Deploys</div>
+      <div class="tl-desc">Matt Williams and Derick Dearing deploy to Grayson and Van Zandt Counties to assess ISD contacts and ground-truth storm damage. Overnight stay.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot pending"></div>
+      <div class="tl-time">Monday, April 28 &mdash; Morning</div>
+      <div class="tl-title">Phase 1: Field Inspections</div>
+      <div class="tl-desc">Advance team conducts on-site inspections of Tom Bean ISD and Grand Saline ISD. Document damage, photograph conditions, assess scope.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot pending"></div>
+      <div class="tl-time">Monday, April 28 &mdash; 12:00 PM</div>
+      <div class="tl-title">Phase 2: Go / No-Go Decision</div>
+      <div class="tl-desc">Matt reports findings to full team. Decision point: deploy remaining teams to the area based on advance assessment and damage severity confirmed on the ground.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot pending"></div>
+      <div class="tl-time">Monday, April 28 &mdash; Afternoon / Tuesday AM</div>
+      <div class="tl-title">Phase 3: Full Team Deployment (if approved)</div>
+      <div class="tl-desc">Up to 3 additional teams deploy to assigned areas of responsibility. See 3-Team Plan below.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ADVANCE TEAM ── -->
+<div class="section" id="advance">
+  <div class="section-label">Phase 1 &mdash; Active</div>
+  <h2>Advance Team Assignments</h2>
+
+  <div class="assign-grid cols-2">
+    <div class="assign-card matt">
+      <div class="assign-name">Matt Williams</div>
+      <div class="assign-role">Advance Lead</div>
+      <div class="assign-dest">Tom Bean ISD &mdash; Grayson County</div>
+      <ul class="assign-detail">
+        <li>Preexisting relationship with district</li>
+        <li>SPC confirmed <strong>2.00&ndash;2.25" hail</strong> at Tom Bean</li>
+        <li>Part of the Grayson County corridor: Bells (3.50"), Whitewright (1.75"), Sherman</li>
+        <li>Morning storms (April 26 AM) &mdash; less than 24 hours before inspection</li>
+      </ul>
+    </div>
+    <div class="assign-card derick">
+      <div class="assign-name">Derick Dearing</div>
+      <div class="assign-role">Advance Recon</div>
+      <div class="assign-dest">Grand Saline ISD &mdash; Van Zandt County</div>
+      <ul class="assign-detail">
+        <li>Preexisting relationship with district</li>
+        <li>Van Zandt County in the eastern DFW storm corridor</li>
+        <li>Damage reports still developing &mdash; ground-truth needed</li>
+        <li>Assess whether Van Zandt warrants full team allocation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <div class="alert-title">Advance Team Objectives</div>
+    <ol class="text-sm" style="margin-left:18px; margin-top:6px;">
+      <li>Photograph hail damage on roofing, HVAC, vehicles, windows, and soft metals</li>
+      <li>Measure and document any hail stones still on the ground (shaded areas, freezers)</li>
+      <li>Confirm whether damage meets total-loss roofing threshold</li>
+      <li>Assess district receptivity and scope (number of buildings, acreage)</li>
+      <li>Note competing adjusters, roofers, or attorneys already on-site</li>
+      <li>Report findings by noon Monday for go/no-go decision</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ── STORM INTEL ── -->
+<div class="section" id="storm">
+  <div class="section-label">Storm Intelligence</div>
+  <h2>Confirmed Hail by County</h2>
+
+  <table>
+    <thead>
+      <tr><th>County</th><th>Max Hail</th><th>Location</th><th>Source</th><th>Priority</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Fannin</strong></td><td>4.00"</td><td>1 W Trenton</td><td>SPC &mdash; photo</td><td><span class="tag tag-critical">Critical</span></td></tr>
+      <tr><td><strong>Grayson</strong></td><td>3.50"</td><td>4 SSW Bells</td><td>SPC</td><td><span class="tag tag-critical">Critical</span></td></tr>
+      <tr><td><strong>Dallas</strong></td><td>3.00"</td><td>Cockrell Hill</td><td>SPC &mdash; photo</td><td><span class="tag tag-critical">Critical</span></td></tr>
+      <tr><td><strong>Tarrant</strong></td><td>3.00"</td><td>Azle / Lakeside</td><td>SPC</td><td><span class="tag tag-critical">Critical</span></td></tr>
+      <tr><td><strong>Archer</strong></td><td>3.00"</td><td>Lakeside City</td><td>SPC</td><td><span class="tag tag-high">High</span></td></tr>
+      <tr><td><strong>Tarrant</strong></td><td>2.75"</td><td>White Settlement / NNW FW</td><td>SPC</td><td><span class="tag tag-critical">Critical</span></td></tr>
+      <tr><td><strong>Wise</strong></td><td>2.75"</td><td>Runaway Bay</td><td>SPC</td><td><span class="tag tag-high">High</span></td></tr>
+      <tr><td><strong>Parker</strong></td><td>2.50"</td><td>Aledo</td><td>SPC</td><td><span class="tag tag-high">High</span></td></tr>
+      <tr><td><strong>Grayson</strong></td><td>2.00&ndash;2.25"</td><td>Tom Bean</td><td>SPC &mdash; photo</td><td><span class="tag tag-confirmed">Confirmed</span></td></tr>
+      <tr><td><strong>Grayson</strong></td><td>1.75"</td><td>Whitewright</td><td>SPC</td><td><span class="tag tag-confirmed">Confirmed</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Confirmed Tornadoes</h3>
+  <table>
+    <thead>
+      <tr><th>Rating</th><th>Location</th><th>County</th><th>Winds</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="tag tag-critical">EF-2</span></td><td>Runaway Bay</td><td>Wise</td><td>135 mph</td><td>1 death, 6 injuries, 20+ families displaced, 64 poles down</td></tr>
+      <tr><td><span class="tag tag-high">EF-1</span></td><td>Springtown area</td><td>Parker</td><td>105 mph</td><td>32 min on ground, 1 death (mobile home), disaster declarations</td></tr>
+    </tbody>
+  </table>
+  <p class="text-sm text-muted" style="margin-top:8px;">5 additional tornado reports in Archer/Clay counties pending NWS survey. NWS Fort Worth full event summary not yet published.</p>
+</div>
+
+<!-- ── CONTACTS IN IMPACT ZONE ── -->
+<div class="section" id="contacts">
+  <div class="section-label">IHM Contact Inventory</div>
+  <h2>Existing Contacts in the Impact Zone</h2>
+  <p>Address markers from Interactive Hail Maps that fall within the confirmed hail/wind/tornado damage path. These are warm contacts &mdash; properties your team has previously assessed or prospected.</p>
+
+  <h3>Tarrant County <span class="tag tag-critical">3.00" Hail Core</span></h3>
+  <table>
+    <thead><tr><th>Address</th><th>Created By</th><th>Prior Reports</th></tr></thead>
+    <tbody>
+      <tr><td>6102 W Pleasant Ridge Rd, <strong>Arlington</strong> 76016</td><td>Matt Williams</td><td>1 Hail Impact</td></tr>
+      <tr><td>2038 Joel East Rd, <strong>Fort Worth</strong> 76140</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>1520 Everman Parkway, <strong>Fort Worth</strong> 76140</td><td>Eric Dearing</td><td>2 Hail Impact</td></tr>
+      <tr><td>775 SE John Jones Dr, <strong>Burleson</strong> 76028</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>550 NW Summercrest Blvd, <strong>Burleson</strong> 76028</td><td>Eric Dearing</td><td>1 Hail Impact</td></tr>
+      <tr><td>201 S Hurst Rd, <strong>Burleson</strong> 76028</td><td>Matt Williams</td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Dallas County <span class="tag tag-critical">3.00" Hail</span></h3>
+  <table>
+    <thead><tr><th>Address</th><th>Created By</th><th>Prior Reports</th></tr></thead>
+    <tbody>
+      <tr><td>4140 Newton Avenue, <strong>Dallas</strong> 75219</td><td>Derick Dearing</td><td>1 Hail Impact</td></tr>
+      <tr><td>1250 Duncanville Rd, <strong>Duncanville</strong> 75116</td><td>Matt Williams</td><td>&mdash;</td></tr>
+      <tr><td>10750 Cradlerock Dr, <strong>Dallas</strong> 75217</td><td>Matt Williams</td><td>&mdash;</td></tr>
+      <tr><td>12300 Lake June Rd, <strong>Balch Springs</strong> 75180</td><td>Matt Williams</td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Parker County <span class="tag tag-high">EF-1 + 2.50" Hail</span></h3>
+  <table>
+    <thead><tr><th>Address</th><th>Created By</th><th>Prior Reports</th></tr></thead>
+    <tbody>
+      <tr><td>400 Eagle Spirit Lane, <strong>Weatherford</strong> 76087</td><td>Matt Williams</td><td>1 Hail Impact</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Grayson County <span class="tag tag-confirmed">3.50" Hail Corridor</span></h3>
+  <table>
+    <thead><tr><th>Address</th><th>Created By</th><th>Prior Reports</th></tr></thead>
+    <tbody>
+      <tr><td>1804 N Hwy 75, <strong>Sherman</strong> 75090</td><td>Matt Williams</td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-warn">
+    <div class="alert-title">Monitored ISDs Also in the Zone</div>
+    <span class="text-sm">Kennedale ISD (Tarrant Co.) and Mansfield ISD (Tarrant Co.) are monitored in IHM but did not trigger alerts for this event. The radar data may not have processed yet, or hail at those specific locations was below the alert threshold. Run manual hail impact reports on these markers.</span>
+  </div>
+</div>
+
+<!-- ── 3-TEAM PLAN ── -->
+<div class="section" id="teams">
+  <div class="section-label">Phase 3 &mdash; Pending Go/No-Go</div>
+  <h2>3-Team Deployment Plan</h2>
+  <p>Contingent on advance team assessment. Deploy after noon April 28 check-in if approved.</p>
+
+  <div class="team-card t1">
+    <div class="team-num">Team 1 &mdash; Tarrant County</div>
+    <div class="team-aor">Fort Worth / White Settlement / Azle / Lake Worth / Arlington</div>
+    <div class="team-why">Heaviest concentration of SPC hail reports in the entire event. 3.00" at Azle &amp; Lakeside, 2.75" at White Settlement. HailTrace 5-star rating. 6 existing IHM markers. 25,000 Oncor customers lost power.</div>
+    <table>
+      <thead><tr><th>Priority Targets</th><th>Hail Size</th></tr></thead>
+      <tbody>
+        <tr><td>White Settlement / Lakeside corridor</td><td>2.75&ndash;3.00"</td></tr>
+        <tr><td>Azle / Lake Worth</td><td>3.00"</td></tr>
+        <tr><td>NNW Fort Worth / Benbrook</td><td>2.00&ndash;2.75"</td></tr>
+        <tr><td>Arlington (Pleasant Ridge Rd marker)</td><td>1.75"+</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="team-card t2">
+    <div class="team-num">Team 2 &mdash; Dallas County</div>
+    <div class="team-aor">Cockrell Hill / SW Dallas / Duncanville / Grand Prairie</div>
+    <div class="team-why">3.00" confirmed hail at Cockrell Hill. Hail penetrated roof decking (documented on Facebook). 23 minutes continuous hail. Highest population density = highest claim volume. 4 existing IHM markers. $13K deductible sticker shock creating PA demand.</div>
+    <table>
+      <thead><tr><th>Priority Targets</th><th>Hail Size</th></tr></thead>
+      <tbody>
+        <tr><td>Cockrell Hill / Dallas Baptist Univ. area</td><td>2.50&ndash;3.00"</td></tr>
+        <tr><td>Duncanville (Duncanville Rd marker)</td><td>1.75"+</td></tr>
+        <tr><td>Grand Prairie</td><td>1.75"+</td></tr>
+        <tr><td>Balch Springs (Lake June Rd marker)</td><td>1.50"+</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="team-card t3">
+    <div class="team-num">Team 3 &mdash; Parker + Wise Counties</div>
+    <div class="team-aor">Springtown / Weatherford / Aledo + Runaway Bay</div>
+    <div class="team-why">Two confirmed tornadoes (EF-2 at 135 mph, EF-1 at 105 mph). 2 fatalities, 6 injuries, 20+ families displaced. Three disaster declarations. Compound wind + hail claims = highest severity per claim. 6,700 TCEC customers still without power.</div>
+    <table>
+      <thead><tr><th>Priority Targets</th><th>Peril</th></tr></thead>
+      <tbody>
+        <tr><td>Springtown &mdash; EF-1 path / Hwy 199 corridor</td><td>Tornado + wind</td></tr>
+        <tr><td>Weatherford (Eagle Spirit Lane marker)</td><td>2.50" hail + wind</td></tr>
+        <tr><td>Runaway Bay &mdash; EF-2 path</td><td>Tornado + 2.75" hail</td></tr>
+        <tr><td>Aledo</td><td>2.50" hail</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Deferred / Second Wave</h3>
+  <table>
+    <thead><tr><th>Area</th><th>Why Deferred</th><th>IHM Markers</th></tr></thead>
+    <tbody>
+      <tr><td>Fannin Co. / Trenton</td><td>4.00" hail but geographically isolated, ~75 mi NE of DFW</td><td>None</td></tr>
+      <tr><td>Grayson Co. / Bells / Whitewright</td><td>3.50" hail, AM storms. Matt advancing to Tom Bean tonight.</td><td>1 (Sherman)</td></tr>
+      <tr><td>Archer / Wichita / Clay</td><td>Tornado reports pending NWS. Remote. 3.00" at Iowa Park (evening 4/26).</td><td>None</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── FIELD INTEL ── -->
+<div class="section" id="field">
+  <div class="section-label">Situational Awareness</div>
+  <h2>Field Intelligence</h2>
+
+  <div class="alert alert-danger">
+    <div class="alert-title">Attorneys Already Advertising</div>
+    <span class="text-sm">John Wood / dragonslayerlawyers.com is actively soliciting on the Facebook Crisis Response page for this event. Time-sensitive to reach claimants before attorney retention locks us out.</span>
+  </div>
+
+  <div class="alert alert-warn">
+    <div class="alert-title">Storm Chase Roofers Active in Grayson County</div>
+    <span class="text-sm">Christian Galvan (local roofer) posted on Facebook April 26: out-of-town roofers are already knocking doors in Whitewright, Trenton, Leonard, Tom Bean, and Paris. <em>"Telling people whatever they need to hear just to get a signature."</em> Matt &mdash; expect competition on the ground at Tom Bean.</span>
+  </div>
+
+  <div class="alert alert-info">
+    <div class="alert-title">Deductible Sticker Shock = PA Value Proposition</div>
+    <span class="text-sm">The 2% wind/hail deductible standard is hitting DFW homeowners hard. One Cockrell Hill resident documented a $13,120 deductible (implies ~$656K dwelling coverage). Homeowners need PA representation to ensure the full claim amount exceeds the deductible meaningfully.</span>
+  </div>
+
+  <h3>Key Damage Documentation (from Facebook)</h3>
+  <ul style="margin-left:18px; font-size:0.88rem;">
+    <li><strong>Cockrell Hill:</strong> Hail stones penetrated roof decking entirely (Jessica Ingersoll, 7+ photos). Total-loss roofing + interior water intrusion.</li>
+    <li><strong>Cockrell Hill:</strong> 23 continuous minutes of hail documented (Tracy Bredemeyer Dickey).</li>
+    <li><strong>Runaway Bay:</strong> Tornado victim identified as Juan Madrid. Family requesting supplies via Mycaila Loya's post (154 shares). <strong>Sensitive &mdash; approach with care.</strong></li>
+    <li><strong>Springtown:</strong> Extensive residential damage documented by Dayson Reed (27+ photos) and DFW Scanner (755 reactions). Active Red Cross fundraiser.</li>
+  </ul>
+
+  <h3>Emergency Declarations &amp; Resources</h3>
+  <table>
+    <thead><tr><th>Jurisdiction</th><th>Authority</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Wise County</td><td>County officials</td><td><span class="tag tag-confirmed">Declared</span></td></tr>
+      <tr><td>City of Springtown</td><td>Mayor Mike Kelley</td><td><span class="tag tag-confirmed">Declared</span> (7-day)</td></tr>
+      <tr><td>Parker County</td><td>Judge Pat Deen</td><td><span class="tag tag-confirmed">Declared</span></td></tr>
+    </tbody>
+  </table>
+  <ul style="margin-left:18px; font-size:0.85rem; margin-top:10px; color:#555;">
+    <li>Red Cross shelter: First United Methodist Church, Springtown</li>
+    <li>Springtown ISD closed Monday (Supt. Shane Strickland)</li>
+    <li>Springtown Police non-emergency: (817) 220-0828</li>
+    <li>Damage reporting: TDEM online form</li>
+    <li>Residents outside city limits &rarr; contact county commissioner for services</li>
+  </ul>
+</div>
+
+<!-- ── LOGISTICS ── -->
+<div class="section" id="logistics">
+  <div class="section-label">Logistics</div>
+  <h2>Check-In &amp; Coordination</h2>
+
+  <h3>Decision Timeline</h3>
+  <ul class="checklist">
+    <li>Advance team deploys &mdash; Sunday evening, April 27</li>
+    <li>Field inspections &mdash; Monday morning, April 28</li>
+    <li>Matt reports to team &mdash; <strong>Monday, April 28 at 12:00 PM</strong></li>
+    <li>Go / No-Go for full deployment &mdash; Monday afternoon</li>
+    <li>Full teams on-site (if approved) &mdash; Monday PM or Tuesday AM</li>
+  </ul>
+
+  <h3>Key Links</h3>
+  <table>
+    <thead><tr><th>Resource</th><th>Link</th></tr></thead>
+    <tbody>
+      <tr><td>Executive Deployment Report (interactive map + photos)</td><td><a href="index.html">Open Report</a></td></tr>
+      <tr><td>SPC Storm Reports &mdash; April 25</td><td><a href="https://www.spc.noaa.gov/climo/reports/260425_rpts.html" target="_blank">spc.noaa.gov</a></td></tr>
+      <tr><td>HailTrace &mdash; April 25</td><td><a href="https://hailtrace.com/hail-maps/04-25-2026/texas" target="_blank">hailtrace.com</a></td></tr>
+      <tr><td>City of Springtown Post-Storm Info</td><td><a href="https://cityofspringtown.com/april-25-2026-severe-weather-post-storm-information/" target="_blank">cityofspringtown.com</a></td></tr>
+      <tr><td>NWS Fort Worth Events (pending)</td><td><a href="https://www.weather.gov/fwd/events" target="_blank">weather.gov/fwd</a></td></tr>
+      <tr><td>Facebook Crisis Response</td><td><a href="https://www.facebook.com/crisisresponse/2106773983389208/" target="_blank">facebook.com</a></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Justice Claims Contacts</h3>
+  <table>
+    <thead><tr><th>Name</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Matt Williams</td><td>Advance Lead &mdash; Tom Bean ISD</td></tr>
+      <tr><td>Derick Dearing</td><td>Advance Recon &mdash; Grand Saline ISD</td></tr>
+      <tr><td>Rick Dearing</td><td>Team &mdash; standby</td></tr>
+      <tr><td>Dawson Denman</td><td>Team &mdash; standby</td></tr>
+      <tr><td>Maureen McAllister</td><td>Team &mdash; standby</td></tr>
+    </tbody>
+  </table>
+  <p class="text-sm text-muted" style="margin-top:10px;">Office: (888) 775-8784 &nbsp;|&nbsp; 531 N 16th St, Orange, TX 77630</p>
+</div>
+
+</div><!-- /main -->
+
+<!-- ════ FOOTER ════ -->
+<div class="footer">
+  <strong>Justice Claims Public Adjusting</strong><br>
+  Advance Operations Brief &mdash; April 25&ndash;26, 2026 North Texas Event<br>
+  Internal Use Only &mdash; Do Not Distribute Outside Organization<br>
+  <br>
+  <em>"Do right by the policyholder."</em>
+</div>
+
+</body>
+</html>
