@@ -435,6 +435,122 @@
     border-radius: 3px;
   }
 
+  /* ── GALLERY ── */
+  .gallery-cat {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--navy);
+    margin: 20px 0 10px;
+    padding: 8px 12px;
+    background: var(--light-gray);
+    border-left: 4px solid var(--orange);
+    border-radius: 0 6px 6px 0;
+  }
+  .gallery-cat:first-of-type { margin-top: 8px; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 10px 0 16px;
+  }
+  .gallery-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--white);
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+  }
+  .gallery-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+  .gallery-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    background: var(--light-gray);
+  }
+  .gallery-item .gi-cap {
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: #444;
+  }
+  .gallery-item .gi-credit {
+    padding: 0 12px 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    color: var(--gray);
+  }
+  .gallery-lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+  .gallery-lightbox.active { display: flex; }
+  .gallery-lightbox img {
+    max-width: 90vw;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .gallery-lightbox .gl-cap {
+    color: var(--white);
+    font-size: 0.85rem;
+    text-align: center;
+    max-width: 700px;
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+  .gallery-lightbox .gl-close {
+    position: fixed;
+    top: 16px; right: 20px;
+    font-size: 2rem;
+    color: var(--white);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    opacity: 0.7;
+    z-index: 10001;
+  }
+  .gallery-lightbox .gl-close:hover { opacity: 1; }
+
+  /* ── PROSPECTING MAP ── */
+  #prospect-map {
+    width: 100%;
+    height: 500px;
+    border-radius: 8px;
+    border: 2px solid var(--navy-10);
+    margin: 16px 0;
+  }
+  .prospect-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 12px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .prospect-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
   /* ── PRINT ── */
   @media print {
     body { background: white; }
@@ -466,6 +582,8 @@
   <a href="#contacts">Contacts</a>
   <a href="#teams">3-Team Plan</a>
   <a href="#field">Field Intel</a>
+  <a href="#hail-guide">Hail Guide</a>
+  <a href="#prospecting">Prospecting Map</a>
   <a href="#logistics">Logistics</a>
 </div>
 
@@ -777,6 +895,146 @@
   </ul>
 </div>
 
+<!-- ── HAIL IMPACT GUIDE ── -->
+<div class="section" id="hail-guide">
+  <div class="section-label">Field Reference</div>
+  <h2>Hail Impact Identification Guide</h2>
+  <p>Reference images showing the types of hail damage to look for during field inspections. Click any image to enlarge.</p>
+
+  <div class="gallery-cat">Standing Seam Metal Roof</div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://bobbehrendsroofing.com/wp-content/uploads/2022/04/metal-roof-hail-damage-750x563-1-300x225.jpg" alt="Standing seam hail dents" loading="lazy" />
+      <div class="gi-cap">Circular dents and cracks at seam from hail impacts. Look for dimpled depressions along flat panels and cracking at seam joints.</div>
+      <div class="gi-credit">Bob Behrends Roofing</div>
+    </div>
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://www.waddleexteriors.com/wp-content/uploads/2020/08/standing-seam-metal-roof-hail-damage-845x321.jpg" alt="Standing seam denting" loading="lazy" />
+      <div class="gi-cap">Standing seam denting &mdash; panel surface sinks in due to weight and force of hailstone impact. Visible under raking light.</div>
+      <div class="gi-credit">Waddle Exteriors</div>
+    </div>
+  </div>
+
+  <div class="gallery-cat">Asphalt Shingle Damage</div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://bobbehrendsroofing.com/wp-content/uploads/2019/05/hail-stone-impacts-asphalt-shingle-roof-300x205.jpg" alt="Shingle granule loss" loading="lazy" />
+      <div class="gi-cap">Multiple dark hail impact marks showing granule displacement. Look for circular dark spots where granules are knocked away exposing the asphalt mat.</div>
+      <div class="gi-credit">Bob Behrends Roofing</div>
+    </div>
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://inspectapedia.com/roof/Hail-damaged-roof-385-Georges.jpg" alt="Shingle hail damage" loading="lazy" />
+      <div class="gi-cap">1.5" hail damage to nearly-new asphalt shingles &mdash; round impact areas where granules have been removed exposing fresh black asphalt substrate.</div>
+      <div class="gi-credit">InspectAPedia</div>
+    </div>
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://inspectapedia.com/roof/Hail_Damaged_Shingle_323_NYs.jpg" alt="Shingle close-up" loading="lazy" />
+      <div class="gi-cap">Close-up of scouring and granule loss. Note the exposed mat where protective granule coating has been stripped by impact.</div>
+      <div class="gi-credit">InspectAPedia</div>
+    </div>
+  </div>
+
+  <div class="gallery-cat">HVAC Condenser Units</div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://warrenforensic.wpengine.com/wp-content/uploads/2019/11/HVAC-hail-damage-coils-fins-1024x682.jpg" alt="Condenser fin damage" loading="lazy" />
+      <div class="gi-cap">Condenser coil fins &mdash; hail-bent fins reduce airflow. Look for flattened, bent, and crushed aluminum fins across the coil array.</div>
+      <div class="gi-credit">Warren Forensics</div>
+    </div>
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://inspectapedia.com/roof/Hail_Damaged_AC_207_RFs.jpg" alt="HVAC unit hail damage" loading="lazy" />
+      <div class="gi-cap">HVAC condenser showing damage to external fins and cabinet &mdash; a commonly overlooked claimable component during hail inspections.</div>
+      <div class="gi-credit">InspectAPedia</div>
+    </div>
+  </div>
+
+  <div class="gallery-cat">Siding &mdash; Vinyl &amp; Aluminum</div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://d12m281ylf13f0.cloudfront.net/images10/1-37-7.jpg" alt="Aluminum siding dents" loading="lazy" />
+      <div class="gi-cap">Aluminum siding with hail indentations &mdash; wetting the surface makes impressions easier to see. Look for circular dimples peppered across panel faces.</div>
+      <div class="gi-credit">InterNACHI</div>
+    </div>
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://d12m281ylf13f0.cloudfront.net/images10/1-37-9.jpg" alt="Siding spatter marks" loading="lazy" />
+      <div class="gi-cap">Spatter marks where hail impact removed surface oxidation. These marks re-oxidize and fade over time &mdash; document early.</div>
+      <div class="gi-credit">InterNACHI</div>
+    </div>
+  </div>
+
+  <div class="gallery-cat">Windows &amp; Screens</div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://d12m281ylf13f0.cloudfront.net/images10/1-37-1.jpg" alt="Window screen damage" loading="lazy" />
+      <div class="gi-cap">Window screen showing streaking and puncture damage from hail. Screens are often the first indicator of hail direction and severity.</div>
+      <div class="gi-credit">InterNACHI</div>
+    </div>
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://images.squarespace-cdn.com/content/v1/6937b131537e846751f4d6ab/2c4b2c0c-1958-4254-aec4-271a111168c7/hail+damaged+window.JPG" alt="Broken window from hail" loading="lazy" />
+      <div class="gi-cap">Window glass broken by large hail impact &mdash; document glass breakage along with frame and sill pitting for the full window claim.</div>
+      <div class="gi-credit">All American Window &amp; Screen</div>
+    </div>
+  </div>
+
+  <div class="gallery-cat">Soft Metals &mdash; Gutters, Downspouts, Flashing</div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://d12m281ylf13f0.cloudfront.net/images10/1-36-1.jpg" alt="Gutter hail dents" loading="lazy" />
+      <div class="gi-cap">Gutter bottom with indentations from hailstones falling directly into the channel. Soft aluminum shows clear circular dent pattern.</div>
+      <div class="gi-credit">InterNACHI</div>
+    </div>
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://d12m281ylf13f0.cloudfront.net/images10/1-36-3.jpg" alt="Downspout dents" loading="lazy" />
+      <div class="gi-cap">Gutters and downspouts with hail dents &mdash; indentations are typically smaller than the diameter of the hail that caused them.</div>
+      <div class="gi-credit">InterNACHI</div>
+    </div>
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://inspectapedia.com/roof/HailDmgDKelly020es.jpg" alt="Flashing dents" loading="lazy" />
+      <div class="gi-cap">Dented metal flashing &mdash; soft metal trim components clearly show impact force that adjacent shingles also absorbed.</div>
+      <div class="gi-credit">InspectAPedia</div>
+    </div>
+  </div>
+
+  <div class="gallery-cat">Vehicle Damage (Hail Size Reference)</div>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Hail_damage_car.jpg" alt="Car hail dents" loading="lazy" />
+      <div class="gi-cap">Vehicle with hail dents across body panels &mdash; circular depressions on hood and roof indicate hail size and density during the event.</div>
+      <div class="gi-credit">Wikimedia Commons</div>
+    </div>
+    <div class="gallery-item" onclick="openGallery(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Perth_hailstorm_2010_damaged_car.jpg" alt="Peppered car panels" loading="lazy" />
+      <div class="gi-cap">Peppered dent pattern across flat body panels &mdash; flat horizontal surfaces (hood, roof) take the heaviest impacts. Use as proxy for stone size.</div>
+      <div class="gi-credit">Wikimedia Commons</div>
+    </div>
+  </div>
+</div>
+
+<!-- Gallery Lightbox -->
+<div class="gallery-lightbox" id="gallery-lb" onclick="if(event.target===this)this.classList.remove('active')">
+  <button class="gl-close" onclick="document.getElementById('gallery-lb').classList.remove('active')">&times;</button>
+  <img id="gl-img" src="" alt="Enlarged reference photo" />
+  <div class="gl-cap" id="gl-cap"></div>
+</div>
+
+<!-- ── PROSPECTING MAP ── -->
+<div class="section" id="prospecting">
+  <div class="section-label">Prospecting</div>
+  <h2>Prospective Structures Map</h2>
+  <p>Commercial and institutional structures in confirmed hail zones. Zoom in to see individual buildings. Click any marker for details.</p>
+
+  <div class="prospect-legend">
+    <span><span class="legend-dot" style="background:#D6492A"></span> Church</span>
+    <span><span class="legend-dot" style="background:#002147"></span> School / ISD</span>
+    <span><span class="legend-dot" style="background:#2E86C1"></span> Apartment</span>
+    <span><span class="legend-dot" style="background:#1B7340"></span> Commercial</span>
+    <span><span class="legend-dot" style="background:#7B2D8E"></span> Government / Other</span>
+  </div>
+
+  <div id="prospect-map"></div>
+  <p class="text-sm text-muted">Structures identified from public records. Roof square footage estimates are approximate. Verify on-site.</p>
+</div>
+
 <!-- ── LOGISTICS ── -->
 <div class="section" id="logistics">
   <div class="section-label">Logistics</div>
@@ -830,6 +1088,167 @@
   <br>
   <em>"Do right by the policyholder."</em>
 </div>
+
+<script>
+function openGallery(el) {
+  var img = el.querySelector('img');
+  var cap = el.querySelector('.gi-cap');
+  document.getElementById('gl-img').src = img.src;
+  document.getElementById('gl-cap').textContent = cap ? cap.textContent : '';
+  document.getElementById('gallery-lb').classList.add('active');
+}
+</script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+<script>
+(function(){
+  var map = L.map('prospect-map',{scrollWheelZoom:true}).setView([32.75,-97.15],9);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution:'&copy; OpenStreetMap contributors',
+    maxZoom:19
+  }).addTo(map);
+
+  var colors = {church:'#D6492A',school:'#002147',apartment:'#2E86C1',commercial:'#1B7340',nursing:'#7B2D8E',government:'#7B2D8E'};
+
+  function makeIcon(type){
+    var c = colors[type]||'#666';
+    return L.divIcon({
+      className:'',
+      html:'<div style="width:14px;height:14px;border-radius:50%;background:'+c+';border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3);"></div>',
+      iconSize:[14,14],iconAnchor:[7,7]
+    });
+  }
+
+  var structures = [
+    // ZONE 1 — Tarrant / White Settlement / Azle / Lake Worth
+    {n:"White Settlement Baptist Church",a:"8616 White Settlement Rd, White Settlement, TX 76108",lat:32.7575,lng:-97.4587,t:"church",z:1,sf:12000},
+    {n:"First Baptist Church of White Settlement",a:"528 Meadow Park Dr, White Settlement, TX 76108",lat:32.7540,lng:-97.4530,t:"church",z:1,sf:15000},
+    {n:"St. Peter the Apostle Catholic Church",a:"1201 S Cherry Ln, White Settlement, TX 76108",lat:32.7432,lng:-97.4540,t:"church",z:1,sf:22000},
+    {n:"Lake Worth ISD Admin",a:"4210 Boat Club Rd, Lake Worth, TX 76135",lat:32.8072,lng:-97.4437,t:"school",z:1,sf:18000},
+    {n:"Lake Worth High School",a:"4201 Boat Club Rd, Lake Worth, TX 76135",lat:32.8060,lng:-97.4455,t:"school",z:1,sf:85000},
+    {n:"Castleberry ISD Admin",a:"1012 Roberts Cut Off Rd, River Oaks, TX 76114",lat:32.7800,lng:-97.3960,t:"school",z:1,sf:20000},
+    {n:"Azle ISD Admin",a:"300 Roe St, Azle, TX 76020",lat:32.8955,lng:-97.5465,t:"school",z:1,sf:16000},
+    {n:"Azle High School",a:"1200 Boyd Rd, Azle, TX 76020",lat:32.9010,lng:-97.5340,t:"school",z:1,sf:110000},
+    {n:"First Baptist Church Azle",a:"336 Church St, Azle, TX 76020",lat:32.8945,lng:-97.5450,t:"church",z:1,sf:20000},
+    {n:"Lakeside Square Apartments",a:"5600 Basswood Blvd, Fort Worth, TX 76137",lat:32.8350,lng:-97.3680,t:"apartment",z:1,sf:60000},
+    {n:"White Settlement ISD Admin",a:"401 S Cherry Ln, White Settlement, TX 76108",lat:32.7485,lng:-97.4528,t:"school",z:1,sf:14000},
+    {n:"Brewer High School",a:"1025 W Loop 820 S, White Settlement, TX 76108",lat:32.7390,lng:-97.4540,t:"school",z:1,sf:95000},
+    {n:"Benbrook Middle/High School",a:"1000 Mercedes St, Benbrook, TX 76126",lat:32.6710,lng:-97.4620,t:"school",z:1,sf:80000},
+    {n:"Western Hills Church of Christ",a:"8800 Chapin Rd, Fort Worth, TX 76116",lat:32.7530,lng:-97.4290,t:"church",z:1,sf:18000},
+    {n:"River Oaks Shopping Center",a:"5300 River Oaks Blvd, River Oaks, TX 76114",lat:32.7725,lng:-97.3900,t:"commercial",z:1,sf:45000},
+
+    // ZONE 2 — Dallas / Cockrell Hill / Duncanville
+    {n:"Cockrell Hill City Hall",a:"4125 W Clarendon Dr, Cockrell Hill, TX 75211",lat:32.7360,lng:-96.8870,t:"government",z:2,sf:8000},
+    {n:"Dallas Baptist University",a:"3000 Mountain Creek Pkwy, Dallas, TX 75211",lat:32.7190,lng:-96.8990,t:"school",z:2,sf:250000},
+    {n:"Mountain Creek Apartments",a:"3710 Dilido Rd, Dallas, TX 75211",lat:32.7285,lng:-96.8850,t:"apartment",z:2,sf:55000},
+    {n:"Duncanville High School",a:"900 W Camp Wisdom Rd, Duncanville, TX 75116",lat:32.6510,lng:-96.9100,t:"school",z:2,sf:120000},
+    {n:"First Baptist Church Duncanville",a:"220 S Main St, Duncanville, TX 75116",lat:32.6510,lng:-96.9050,t:"church",z:2,sf:25000},
+    {n:"Holy Cross Lutheran Church",a:"11425 Marsh Ln, Dallas, TX 75229",lat:32.7330,lng:-96.8810,t:"church",z:2,sf:14000},
+    {n:"Grand Prairie ISD Admin",a:"2602 S Belt Line Rd, Grand Prairie, TX 75052",lat:32.7010,lng:-96.9790,t:"school",z:2,sf:22000},
+    {n:"South Grand Prairie High School",a:"301 Warrior Trail, Grand Prairie, TX 75052",lat:32.6920,lng:-96.9750,t:"school",z:2,sf:130000},
+    {n:"St. Kevin Catholic Church",a:"2600 Senter Valley Rd, Dallas, TX 75211",lat:32.7240,lng:-96.8720,t:"church",z:2,sf:16000},
+    {n:"Mountain View Community Church",a:"4101 Mountain Creek Pkwy, Dallas, TX 75211",lat:32.7200,lng:-96.8930,t:"church",z:2,sf:12000},
+    {n:"Village Oaks Apartments",a:"505 E Wheatland Rd, Duncanville, TX 75116",lat:32.6430,lng:-96.9000,t:"apartment",z:2,sf:70000},
+    {n:"Camp Wisdom Crossing Shopping",a:"3030 W Camp Wisdom Rd, Dallas, TX 75237",lat:32.6480,lng:-96.8950,t:"commercial",z:2,sf:55000},
+
+    // ZONE 3 — Parker County / Springtown / Weatherford / Aledo
+    {n:"Springtown ISD Admin",a:"303 E 4th St, Springtown, TX 76082",lat:32.9660,lng:-97.6830,t:"school",z:3,sf:14000},
+    {n:"Springtown High School",a:"600 E Hwy 199, Springtown, TX 76082",lat:32.9640,lng:-97.6750,t:"school",z:3,sf:95000},
+    {n:"First United Methodist Church Springtown",a:"316 N Main St, Springtown, TX 76082",lat:32.9680,lng:-97.6840,t:"church",z:3,sf:16000},
+    {n:"First Baptist Church Springtown",a:"432 E 2nd St, Springtown, TX 76082",lat:32.9660,lng:-97.6800,t:"church",z:3,sf:18000},
+    {n:"Weatherford ISD Admin",a:"1100 Longhorn Dr, Weatherford, TX 76086",lat:32.7580,lng:-97.8030,t:"school",z:3,sf:20000},
+    {n:"Weatherford High School",a:"2121 Bethel Rd, Weatherford, TX 76086",lat:32.7470,lng:-97.7650,t:"school",z:3,sf:130000},
+    {n:"Aledo ISD Admin",a:"1008 Bailey Ranch Rd, Aledo, TX 76008",lat:32.6980,lng:-97.6020,t:"school",z:3,sf:16000},
+    {n:"Aledo High School",a:"1000 Bailey Ranch Rd, Aledo, TX 76008",lat:32.6970,lng:-97.6000,t:"school",z:3,sf:120000},
+    {n:"First Baptist Church Weatherford",a:"314 Church St, Weatherford, TX 76086",lat:32.7580,lng:-97.7970,t:"church",z:3,sf:30000},
+    {n:"Grace First Presbyterian Church",a:"606 N Elm St, Weatherford, TX 76086",lat:32.7610,lng:-97.7930,t:"church",z:3,sf:18000},
+    {n:"Parker County Courthouse",a:"1 Courthouse Square, Weatherford, TX 76086",lat:32.7590,lng:-97.7970,t:"government",z:3,sf:25000},
+    {n:"Springtown Plaza Shopping",a:"109 E Hwy 199, Springtown, TX 76082",lat:32.9640,lng:-97.6810,t:"commercial",z:3,sf:30000},
+
+    // ZONE 4 — Grayson County / Tom Bean / Bells / Whitewright / Sherman
+    {n:"Tom Bean ISD Admin",a:"307 S Britton St, Tom Bean, TX 75489",lat:33.5185,lng:-96.4840,t:"school",z:4,sf:14000},
+    {n:"Tom Bean High School",a:"306 S Britton St, Tom Bean, TX 75489",lat:33.5180,lng:-96.4845,t:"school",z:4,sf:55000},
+    {n:"Bells ISD",a:"216 E Bell Ave, Bells, TX 75414",lat:33.6100,lng:-96.4170,t:"school",z:4,sf:50000},
+    {n:"Whitewright ISD",a:"100 Bulldog Blvd, Whitewright, TX 75491",lat:33.5130,lng:-96.3930,t:"school",z:4,sf:45000},
+    {n:"First Baptist Church Tom Bean",a:"200 N Elm St, Tom Bean, TX 75489",lat:33.5200,lng:-96.4830,t:"church",z:4,sf:10000},
+    {n:"First Baptist Church Bells",a:"301 E Bell Ave, Bells, TX 75414",lat:33.6105,lng:-96.4150,t:"church",z:4,sf:12000},
+    {n:"Sherman ISD Admin",a:"2701 Loy Lake Rd, Sherman, TX 75090",lat:33.6250,lng:-96.6180,t:"school",z:4,sf:20000},
+    {n:"Sherman High School",a:"2701 N Loy Lake Rd, Sherman, TX 75090",lat:33.6260,lng:-96.6170,t:"school",z:4,sf:140000},
+    {n:"First Baptist Church Sherman",a:"501 N Highland Ave, Sherman, TX 75092",lat:33.6420,lng:-96.6100,t:"church",z:4,sf:28000},
+    {n:"Austin College",a:"900 N Grand Ave, Sherman, TX 75090",lat:33.6460,lng:-96.6130,t:"school",z:4,sf:200000},
+    {n:"Post Oak Mall Shopping Center",a:"2201 Texoma Pkwy, Sherman, TX 75090",lat:33.6340,lng:-96.5950,t:"commercial",z:4,sf:80000},
+    {n:"Whitewright First United Methodist",a:"211 N Grand St, Whitewright, TX 75491",lat:33.5150,lng:-96.3920,t:"church",z:4,sf:10000},
+
+    // ZONE 5 — Wise County / Runaway Bay
+    {n:"Runaway Bay City Hall",a:"501 Port O Call Dr, Runaway Bay, TX 76426",lat:33.1680,lng:-97.8750,t:"government",z:5,sf:6000},
+    {n:"Slidell ISD",a:"901 Wildcat Dr, Slidell, TX 76267",lat:33.3610,lng:-97.3880,t:"school",z:5,sf:35000},
+    {n:"First Baptist Church Bridgeport",a:"500 12th St, Bridgeport, TX 76426",lat:33.2100,lng:-97.7550,t:"church",z:5,sf:18000},
+    {n:"Bridgeport ISD Admin",a:"2107 15th St, Bridgeport, TX 76426",lat:33.2050,lng:-97.7490,t:"school",z:5,sf:16000},
+    {n:"Bridgeport High School",a:"2107 Ellison St, Bridgeport, TX 76426",lat:33.2020,lng:-97.7530,t:"school",z:5,sf:75000},
+    {n:"Paradise ISD",a:"338 School House Rd, Paradise, TX 76073",lat:33.1540,lng:-97.6870,t:"school",z:5,sf:40000},
+    {n:"Runaway Bay Golf Course Club",a:"700 Nocona Dr, Runaway Bay, TX 76426",lat:33.1720,lng:-97.8680,t:"commercial",z:5,sf:10000}
+  ];
+
+  var clusters = L.markerClusterGroup({
+    maxClusterRadius: 50,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: true,
+    iconCreateFunction: function(cluster) {
+      var count = cluster.getChildCount();
+      var size = count < 10 ? 'small' : count < 25 ? 'medium' : 'large';
+      var r = size === 'small' ? 30 : size === 'medium' ? 40 : 50;
+      return L.divIcon({
+        html:'<div style="width:'+r+'px;height:'+r+'px;border-radius:50%;background:rgba(0,33,71,0.85);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:700;font-size:'+(r<35?'0.75rem':'0.9rem')+';box-shadow:0 2px 8px rgba(0,0,0,0.3);border:2px solid rgba(255,255,255,0.5);">'+count+'</div>',
+        className:'',
+        iconSize:[r,r]
+      });
+    }
+  });
+
+  var zoneNames = {1:'Tarrant Co. — 3.00" Hail Core',2:'Dallas Co. — 3.00" Hail',3:'Parker Co. — EF-1 + 2.50" Hail',4:'Grayson Co. — 3.50" Hail Corridor',5:'Wise Co. — EF-2 Tornado'};
+  var typeLabels = {church:'Church',school:'School / ISD',apartment:'Apartment Complex',commercial:'Commercial / Retail',nursing:'Nursing / Care',government:'Government / Municipal'};
+
+  structures.forEach(function(s){
+    var m = L.marker([s.lat,s.lng],{icon:makeIcon(s.t)});
+    var sqft = s.sf ? s.sf.toLocaleString()+' SF (est.)' : 'TBD';
+    m.bindPopup(
+      '<div style="font-family:Montserrat,sans-serif;min-width:200px;">'+
+      '<div style="font-weight:700;font-size:0.85rem;color:#002147;margin-bottom:4px;">'+s.n+'</div>'+
+      '<div style="font-size:0.75rem;color:#666;margin-bottom:6px;">'+s.a+'</div>'+
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;">'+
+      '<span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:2px 6px;border-radius:3px;background:'+(colors[s.t]||'#666')+'20;color:'+(colors[s.t]||'#666')+';">'+typeLabels[s.t]+'</span>'+
+      '<span style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:2px 6px;border-radius:3px;background:#f0f0f0;color:#555;">Zone '+s.z+'</span>'+
+      '</div>'+
+      '<div style="font-size:0.75rem;"><strong>Est. Roof:</strong> '+sqft+'</div>'+
+      '<div style="font-size:0.7rem;color:#888;margin-top:4px;">'+zoneNames[s.z]+'</div>'+
+      '</div>'
+    );
+    clusters.addLayer(m);
+  });
+
+  map.addLayer(clusters);
+
+  // Add hail zone overlay circles
+  var zones = [
+    {lat:32.755,lng:-97.45,r:8000,c:'#D6492A',l:'White Settlement 3.00"'},
+    {lat:32.895,lng:-97.55,r:5000,c:'#D6492A',l:'Azle 3.00"'},
+    {lat:32.736,lng:-96.887,r:5000,c:'#D6492A',l:'Cockrell Hill 3.00"'},
+    {lat:32.966,lng:-97.683,r:7000,c:'#7B2D8E',l:'Springtown EF-1'},
+    {lat:33.168,lng:-97.875,r:5000,c:'#7B2D8E',l:'Runaway Bay EF-2'},
+    {lat:33.61,lng:-96.42,r:6000,c:'#002147',l:'Bells 3.50"'},
+    {lat:33.518,lng:-96.48,r:4000,c:'#002147',l:'Tom Bean 2.25"'}
+  ];
+  zones.forEach(function(z){
+    L.circle([z.lat,z.lng],{radius:z.r,color:z.c,fillColor:z.c,fillOpacity:0.08,weight:1.5,dashArray:'5,5'}).addTo(map).bindTooltip(z.l,{permanent:false,direction:'top'});
+  });
+})();
+</script>
 
 </body>
 </html>
