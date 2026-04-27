@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justice Claims — Executive Deployment Report | April 25–26, 2026 North Texas Storm</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap');
+
+  :root {
+    --navy: #002147;
+    --orange: #D6492A;
+    --gray: #AAABAC;
+    --light-gray: #F4F5F6;
+    --dark-gray: #2C2C2C;
+    --white: #FFFFFF;
+    --navy-10: rgba(0, 33, 71, 0.08);
+    --navy-20: rgba(0, 33, 71, 0.15);
+    --orange-10: rgba(214, 73, 42, 0.08);
+    --orange-light: #F8E8E4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--dark-gray);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: linear-gradient(135deg, var(--navy) 0%, #001533 60%, #000d1f 100%);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(214,73,42,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange), var(--orange) 30%, transparent 100%);
+  }
+
+  .cover-badge {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cover-badge::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 2px;
+    background: var(--orange);
+  }
+
+  .cover h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    max-width: 800px;
+  }
+
+  .cover h1 span {
+    color: var(--orange);
+  }
+
+  .cover-subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.7;
+    opacity: 0.75;
+    max-width: 560px;
+    margin-bottom: 60px;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  .cover-meta dt { font-weight: 600; margin-bottom: 4px; }
+  .cover-meta dd { font-weight: 300; opacity: 0.9; }
+
+  .cover-logo {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+  }
+
+  .cover-logo img {
+    height: 80px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  }
+
+  .footer-logo {
+    height: 50px;
+    width: auto;
+    margin-bottom: 8px;
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 60px;
+  }
+
+  @media print {
+    .cover { min-height: auto; padding: 60px; page-break-after: always; }
+    .page { padding: 40px; }
+    .section { page-break-inside: avoid; }
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section { margin-bottom: 72px; }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 20px;
+    height: 2px;
+    background: var(--orange);
+  }
+
+  .section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin-bottom: 28px;
+  }
+
+  .section h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 16px;
+    margin-top: 36px;
+  }
+
+  .section p {
+    margin-bottom: 16px;
+    max-width: 780px;
+  }
+
+  /* ── STAT CARDS ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 36px 0;
+  }
+
+  .stat-card {
+    background: var(--light-gray);
+    border-radius: 12px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--navy);
+  }
+
+  .stat-card.accent::before { background: var(--orange); }
+
+  .stat-card .number {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+
+  .stat-card.accent .number { color: var(--orange); }
+
+  .stat-card .label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 8px;
+  }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0 36px;
+    font-size: 0.88rem;
+  }
+
+  .data-table thead th {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--navy);
+    padding: 14px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .data-table thead th:first-child { border-radius: 8px 0 0 0; }
+  .data-table thead th:last-child { border-radius: 0 8px 0 0; }
+
+  .data-table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--navy-10);
+    vertical-align: top;
+  }
+
+  .data-table tbody tr:hover { background: var(--navy-10); }
+
+  .data-table tbody tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .data-table tbody tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+  .data-table .highlight {
+    font-weight: 600;
+    color: var(--orange);
+  }
+
+  .data-table .tag {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .tag-critical { background: var(--orange); color: var(--white); }
+  .tag-high { background: var(--orange-light); color: var(--orange); }
+  .tag-moderate { background: var(--navy-10); color: var(--navy); }
+  .tag-new { background: #E8F5E9; color: #2E7D32; }
+
+  /* ── TIER CARDS ── */
+  .tier-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 24px 0;
+  }
+
+  .tier-card {
+    background: var(--white);
+    border: 1px solid var(--navy-20);
+    border-radius: 12px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: box-shadow 0.2s;
+  }
+
+  .tier-card:hover { box-shadow: 0 4px 24px rgba(0,33,71,0.08); }
+
+  .tier-card.critical { border-left: 4px solid var(--orange); }
+  .tier-card.high { border-left: 4px solid var(--navy); }
+
+  .tier-rank {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--navy);
+    background: var(--light-gray);
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tier-card.critical .tier-rank { background: var(--orange); color: var(--white); }
+
+  .tier-body h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .tier-body .tier-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--gray);
+    margin-bottom: 10px;
+  }
+
+  .tier-body p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 0;
+  }
+
+  .tier-chips {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--navy-10);
+    color: var(--navy);
+  }
+
+  .chip.peril-hail { background: #E3F2FD; color: #1565C0; }
+  .chip.peril-wind { background: #FFF3E0; color: #E65100; }
+  .chip.peril-tornado { background: #FCE4EC; color: #C62828; }
+  .chip.peril-flood { background: #E0F2F1; color: #00695C; }
+  .chip.client-commercial { background: var(--navy); color: var(--white); }
+  .chip.client-residential { background: var(--navy-20); color: var(--navy); }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    margin: 36px 0;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--navy-20);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--navy);
+  }
+
+  .timeline-item.severe::before { background: var(--orange); box-shadow: 0 0 0 2px var(--orange); }
+
+  .timeline-time {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .timeline-text {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--light-gray);
+    border-left: 4px solid var(--orange);
+    border-radius: 0 12px 12px 0;
+    padding: 24px 28px;
+    margin: 28px 0;
+    font-size: 0.92rem;
+  }
+
+  .callout-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  /* ── DUAL COLUMN ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .cover { padding: 40px 24px; }
+    .page { padding: 40px 24px; }
+    .cover-logo { position: static; margin-bottom: 20px; text-align: center; }
+    .cover-meta { gap: 24px; }
+    .tier-card { grid-template-columns: 1fr; }
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--navy-20);
+    margin: 72px 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    color: var(--white);
+    padding: 48px 60px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer a { color: var(--orange); text-decoration: none; }
+  .footer .confidential {
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  /* ── MAP ── */
+  #storm-map {
+    width: 100%;
+    height: 650px;
+    border-radius: 12px;
+    border: 1px solid var(--navy-20);
+    margin: 24px 0;
+    z-index: 1;
+  }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 10px !important;
+    box-shadow: 0 8px 32px rgba(0,33,71,0.18) !important;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+
+  .leaflet-popup-content { margin: 0 !important; width: 340px !important; }
+
+  .map-popup { font-family: 'Montserrat', sans-serif; }
+
+  /* Carousel */
+  .carousel { position: relative; width: 100%; height: 200px; background: #111; overflow: hidden; }
+
+  .carousel-slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+
+  .carousel-slide.active { display: block; }
+  .carousel-slide:hover { opacity: 0.88; }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    line-height: 1;
+  }
+
+  .carousel-btn:hover { background: rgba(214,73,42,0.85); }
+  .carousel-prev { left: 8px; }
+  .carousel-next { right: 8px; }
+
+  .carousel-counter {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(0,0,0,0.55);
+    padding: 2px 8px;
+    border-radius: 10px;
+    z-index: 2;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 2;
+  }
+
+  .carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .carousel-dot.active { background: #fff; }
+
+  .carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 10px 26px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 400;
+    line-height: 1.4;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .map-popup-body { padding: 14px 16px 16px; }
+
+  .map-popup-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .map-popup-size {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+
+  .map-popup-detail {
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .map-popup-source {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--navy);
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  .map-popup-source:hover { background: var(--orange); }
+
+  .map-legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 16px 0 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--dark-gray);
+  }
+
+  .map-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .map-legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  }
+
+  /* ── LIGHTBOX ── */
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 13, 31, 0.92);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    padding: 40px;
+  }
+
+  .lightbox-overlay.active { display: flex; }
+
+  .lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+    object-fit: contain;
+  }
+
+  .lightbox-caption {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--white);
+    background: rgba(0,33,71,0.8);
+    padding: 8px 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+    max-width: 90vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 20px;
+    right: 28px;
+    font-size: 2rem;
+    color: var(--white);
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    z-index: 10001;
+    background: none;
+    border: none;
+    line-height: 1;
+  }
+
+  .lightbox-close:hover { opacity: 1; }
+
+  .lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    color: var(--white);
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    z-index: 10001;
+    background: rgba(0,33,71,0.5);
+    border: none;
+    line-height: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+  .lightbox-nav:hover { opacity: 1; background: rgba(0,33,71,0.8); }
+  .lightbox-prev { left: 16px; }
+  .lightbox-next { right: 16px; }
+  .lightbox-counter {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--white);
+    opacity: 0.7;
+    z-index: 10001;
+  }
+
+  /* ── SOURCE LINKS ── */
+  .data-table a {
+    color: var(--navy);
+    text-decoration: none;
+    border-bottom: 1px solid var(--navy-20);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .data-table a:hover {
+    color: var(--orange);
+    border-bottom-color: var(--orange);
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════ COVER -->
+<header class="cover">
+  <div class="cover-logo">
+    <img src="https://images.squarespace-cdn.com/content/v1/5ec6d473aff3b65cb3516f6f/d6acebf3-3614-4679-a7ec-c65ab5fc97e8/JC+Full+Logo+All+White.png" alt="Justice Claims Public Adjusting">
+  </div>
+
+  <div class="cover-badge">Executive Deployment Report</div>
+
+  <h1>April 25–26 <span>North Texas</span> Hail & Wind Storm</h1>
+
+  <p class="cover-subtitle">
+    Catastrophe event assessment and commercial deployment strategy for the multi-county severe weather event impacting the Dallas–Fort Worth Metroplex and surrounding North Texas counties.
+  </p>
+
+  <dl class="cover-meta">
+    <div>
+      <dt>Prepared</dt>
+      <dd>April 26, 2026</dd>
+    </div>
+    <div>
+      <dt>Status</dt>
+      <dd>Preliminary — NWS surveys ongoing</dd>
+    </div>
+    <div>
+      <dt>Classification</dt>
+      <dd>CAT Storm Event</dd>
+    </div>
+    <div>
+      <dt>State</dt>
+      <dd>Texas</dd>
+    </div>
+  </dl>
+</header>
+
+<!-- ════════════════════════════════════════════════════ EVENT AT A GLANCE -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-label">Overview</div>
+    <h2>Event at a Glance</h2>
+    <p>A powerful supercell thunderstorm complex produced very large hail, damaging straight-line winds, an EF-2 tornado, and flash flooding across North Texas from Saturday evening April 25 through early Sunday morning April 26, 2026. The primary supercell ignited in Wichita County at approximately 4:00 PM CDT and tracked southeast for nearly 12 continuous hours through the heart of the DFW Metroplex before dissipating around 3:30 AM CDT Sunday.</p>
+
+    <div class="stats-row">
+      <div class="stat-card accent">
+        <div class="number">4.00"</div>
+        <div class="label">Largest Confirmed Hail (Trenton, TX)</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="number">89 mph</div>
+        <div class="label">Peak Measured Wind (Springtown)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">EF-2</div>
+        <div class="label">Tornado — 135 mph (Runaway Bay)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">411K+</div>
+        <div class="label">Properties in 1"+ Hail Zone</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">67,597</div>
+        <div class="label">Properties in 2.5"+ Hail Zone</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">23</div>
+        <div class="label">Counties Under Watch</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Key Intelligence Update</div>
+      SPC ground-truth storm reports significantly upgrade initial HailPoint and news-sourced data. <strong>Dallas County hail is confirmed at 3.00"</strong> (was 2.00"), <strong>Tarrant County at 3.00"</strong> (was 1.25"), and a <strong>4.00" photo-confirmed event at Trenton (Fannin County)</strong> represents the largest confirmed stone in Texas for this event. A <strong>3.50" event at Bells (Grayson County)</strong> is the second-largest. These are total-loss roofing scenarios across major commercial corridors.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════ STORM TIMELINE -->
+  <div class="section">
+    <div class="section-label">Chronology</div>
+    <h2>Supercell Timeline</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">4:00 PM CDT — Wichita County</div>
+        <div class="timeline-text">Primary supercell ignites. Storm begins tracking southeast.</div>
+      </div>
+      <div class="timeline-item severe">
+        <div class="timeline-time">5:25–6:20 PM — Archer County</div>
+        <div class="timeline-text"><strong>3.00" hail</strong> at Lakeside City. 2.00" at Holliday. Tornado reports begin near Archer City.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">7:00–8:20 PM — Clay County</div>
+        <div class="timeline-text">Multiple tornado reports at Windthorst. 1.75" hail at Lake Arrowhead.</div>
+      </div>
+      <div class="timeline-item severe">
+        <div class="timeline-time">8:10–9:30 PM — Jack / Wise County</div>
+        <div class="timeline-text">2.00" hail NE of Jacksboro. <strong>2.75" hail at Runaway Bay. EF-2 tornado strikes</strong> — 135 mph, 1 fatality, 6 injuries, 20–40 families displaced.</div>
+      </div>
+      <div class="timeline-item severe">
+        <div class="timeline-time">9:35–10:00 PM — Parker County</div>
+        <div class="timeline-text"><strong>89 mph measured gust</strong> at Springtown. Structural collapse, 1 fatality. 2.50" hail at Aledo.</div>
+      </div>
+      <div class="timeline-item severe">
+        <div class="timeline-time">10:10 PM–12:35 AM — Tarrant County</div>
+        <div class="timeline-text"><strong>3.00" hail at Azle and Lakeside. 2.75" at White Settlement and NNW Fort Worth.</strong> 70 mph ASOS-measured wind at Westworth. Flash flooding in SW Fort Worth. Heaviest concentration of SPC hail reports in the entire event.</div>
+      </div>
+      <div class="timeline-item severe">
+        <div class="timeline-time">12:50–1:30 AM — Dallas County</div>
+        <div class="timeline-text"><strong>3.00" hail at Cockrell Hill</strong> (near Dallas Baptist University). 2.50" at same location. 60 mph ASOS-measured wind at Duncanville.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">3:30 AM</div>
+        <div class="timeline-text">Primary supercell dissipates.</div>
+      </div>
+      <div class="timeline-item severe">
+        <div class="timeline-time">6:00–7:00 AM — Grayson County</div>
+        <div class="timeline-text">Secondary storm. <strong>4.00" hail at Trenton (Fannin Co.)</strong> — largest confirmed stone in Texas. <strong>3.50" at Bells</strong>. 2.00" at Tom Bean. 1.75" at Whitewright.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════ HAIL DATA -->
+  <div class="section">
+    <div class="section-label">Storm Data</div>
+    <h2>Confirmed Hail — Peak by County</h2>
+    <p>All data from SPC Preliminary Local Storm Reports unless otherwise noted. Sorted by confirmed hail size descending.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>County</th>
+          <th>Peak Hail</th>
+          <th>Location</th>
+          <th>Source</th>
+          <th>Severity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fannin</strong></td>
+          <td class="highlight">4.00"</td>
+          <td>1 W Trenton</td>
+          <td>SPC LSR — photo</td>
+          <td><span class="tag tag-critical">CRITICAL</span></td>
+        </tr>
+        <tr>
+          <td><strong>Grayson</strong></td>
+          <td class="highlight">3.50"</td>
+          <td>4 SSW Bells</td>
+          <td>SPC LSR</td>
+          <td><span class="tag tag-critical">CRITICAL</span></td>
+        </tr>
+        <tr>
+          <td><strong>Archer</strong></td>
+          <td class="highlight">3.00"</td>
+          <td>6 SSW Lakeside City</td>
+          <td>SPC LSR</td>
+          <td><span class="tag tag-critical">CRITICAL</span></td>
+        </tr>
+        <tr>
+          <td><strong>Tarrant</strong></td>
+          <td class="highlight">3.00"</td>
+          <td>Azle &amp; Lakeside (2 reports)</td>
+          <td>SPC LSR — photo</td>
+          <td><span class="tag tag-critical">CRITICAL</span></td>
+        </tr>
+        <tr>
+          <td><strong>Dallas</strong></td>
+          <td class="highlight">3.00"</td>
+          <td>4 WSW Cockrell Hill</td>
+          <td>SPC LSR — photo</td>
+          <td><span class="tag tag-critical">CRITICAL</span></td>
+        </tr>
+        <tr>
+          <td><strong>Wise</strong></td>
+          <td class="highlight">2.75"</td>
+          <td>Runaway Bay</td>
+          <td>SPC LSR</td>
+          <td><span class="tag tag-high">HIGH</span></td>
+        </tr>
+        <tr>
+          <td><strong>Parker</strong></td>
+          <td class="highlight">2.50"</td>
+          <td>3 NNE Aledo</td>
+          <td>SPC LSR — photo</td>
+          <td><span class="tag tag-high">HIGH</span></td>
+        </tr>
+        <tr>
+          <td><strong>Palo Pinto</strong></td>
+          <td>2.50"</td>
+          <td>Mineral Wells</td>
+          <td>HailPoint (radar)</td>
+          <td><span class="tag tag-high">HIGH</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jack</strong></td>
+          <td>2.00"</td>
+          <td>11 NE Jacksboro</td>
+          <td>SPC LSR</td>
+          <td><span class="tag tag-moderate">MODERATE</span></td>
+        </tr>
+        <tr>
+          <td><strong>Erath</strong></td>
+          <td>2.00"</td>
+          <td>Stephenville</td>
+          <td>HailPoint (radar)</td>
+          <td><span class="tag tag-moderate">MODERATE</span></td>
+        </tr>
+        <tr>
+          <td><strong>Fannin</strong></td>
+          <td>1.75"</td>
+          <td>Trenton</td>
+          <td>SPC LSR</td>
+          <td><span class="tag tag-moderate">MODERATE</span></td>
+        </tr>
+        <tr>
+          <td><strong>Clay</strong></td>
+          <td>1.75"</td>
+          <td>6 NW Lake Arrowhead</td>
+          <td>SPC LSR</td>
+          <td><span class="tag tag-moderate">MODERATE</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ellis</strong></td>
+          <td>1.00"</td>
+          <td>Oak Leaf</td>
+          <td>SPC LSR</td>
+          <td><span class="tag tag-moderate">MODERATE</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Confirmed Wind Reports</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Speed</th>
+          <th>County</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Runaway Bay</strong></td>
+          <td class="highlight">135 mph</td>
+          <td>Wise</td>
+          <td>EF-2 Tornado (NWS Survey)</td>
+        </tr>
+        <tr>
+          <td><strong>1 NW Springtown</strong></td>
+          <td class="highlight">89 mph</td>
+          <td>Parker</td>
+          <td>Amateur Radio Spotter (measured)</td>
+        </tr>
+        <tr>
+          <td><strong>1 NW Westworth</strong></td>
+          <td>70 mph</td>
+          <td>Tarrant</td>
+          <td>KNFW ASOS (instrument)</td>
+        </tr>
+        <tr>
+          <td><strong>4 NE Duncanville</strong></td>
+          <td>60 mph</td>
+          <td>Dallas</td>
+          <td>KRBD ASOS (instrument)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════ PHOTO MAP -->
+  <div class="section">
+    <div class="section-label">Impact Map</div>
+    <h2>Confirmed Damage &amp; Photo Documentation</h2>
+    <p>Interactive map of SPC-confirmed hail and wind reports with photo documentation. Click any marker to view details — click the photo to enlarge. Marker size reflects hail diameter; color reflects severity tier.</p>
+
+    <div class="map-legend">
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#D6492A;"></div> Critical (3.00"+)</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#002147;"></div> High (2.00"–2.99")</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#5B8DB8;"></div> Moderate (1.00"–1.99")</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:#7B2D8E;"></div> Tornado / Wind</div>
+    </div>
+
+    <div id="storm-map"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════ DEPLOYMENT TARGETS -->
+  <div class="section">
+    <div class="section-label">Deployment Strategy</div>
+    <h2>Priority Deployment Targets — Commercial Focus</h2>
+    <p>Ranked by commercial client opportunity, accounting for hail severity, population density, commercial corridor concentration, and claim complexity. Residential deployment potential noted where applicable.</p>
+
+    <div class="tier-grid">
+
+      <div class="tier-card critical">
+        <div class="tier-rank">1</div>
+        <div class="tier-body">
+          <h4>Tarrant County — Azle / Lakeside / White Settlement / Fort Worth</h4>
+          <div class="tier-sub">3.00" confirmed hail &bull; 70 mph ASOS wind &bull; Flash flooding</div>
+          <p>Heaviest concentration of SPC hail reports in the entire event. 3.00" at Azle and Lakeside, 2.75" at White Settlement and NNW Fort Worth, 2.50" at White Settlement, 2.00" at Benbrook and Kennedale. Flash flooding in SW Fort Worth creates dual-peril claims with complex coverage questions (watch for ACC denials). The western Tarrant corridor contains significant commercial strip centers, warehousing, industrial parks, and multi-family housing. Fort Worth CBD and surrounding commercial districts sustained 60–70+ mph winds.</p>
+          <div class="tier-chips">
+            <span class="chip peril-hail">3.00" Hail</span>
+            <span class="chip peril-wind">70 mph Wind</span>
+            <span class="chip peril-flood">Flash Flood</span>
+            <span class="chip client-commercial">Commercial Priority</span>
+            <span class="chip client-residential">Residential</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier-card critical">
+        <div class="tier-rank">2</div>
+        <div class="tier-body">
+          <h4>Dallas County — Cockrell Hill / SW Dallas / Grand Prairie</h4>
+          <div class="tier-sub">3.00" confirmed hail &bull; 60 mph ASOS wind &bull; Highest claim volume potential</div>
+          <p>3.00" confirmed baseball-size hail at Cockrell Hill / Dallas Baptist University area with photo documentation. 2.50" also confirmed at the same location. The southern Dallas County corridor (Cockrell Hill through Duncanville to Oak Leaf) contains dense commercial retail, auto dealerships, logistics facilities, and multi-family complexes. At 3.00", expect total-loss roofing on commercial flat and low-slope systems, HVAC damage, window and storefront damage, and significant vehicle fleet losses.</p>
+          <div class="tier-chips">
+            <span class="chip peril-hail">3.00" Hail</span>
+            <span class="chip peril-wind">60 mph Wind</span>
+            <span class="chip client-commercial">Commercial Priority</span>
+            <span class="chip client-residential">Residential</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier-card critical">
+        <div class="tier-rank">3</div>
+        <div class="tier-body">
+          <h4>Parker County — Springtown / Aledo / Willow Park</h4>
+          <div class="tier-sub">89 mph measured wind &bull; 2.50" hail &bull; Structural collapse &bull; 1 fatality</div>
+          <p>Highest measured straight-line wind in the event at 89 mph (Springtown). 2.50" hail confirmed at Aledo via photo. Manufactured homes toppled, vehicles overturned, structural collapses documented across the Springtown corridor. The Aledo–Willow Park corridor along I-20 contains commercial development, equestrian and agricultural operations, and high-value residential. Wind claims at 89 mph substantiate significant structural damage beyond what standard hail-only claims would support.</p>
+          <div class="tier-chips">
+            <span class="chip peril-hail">2.50" Hail</span>
+            <span class="chip peril-wind">89 mph Wind</span>
+            <span class="chip peril-tornado">Tornado Warning</span>
+            <span class="chip client-commercial">Commercial Priority</span>
+            <span class="chip client-residential">Residential</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier-card high">
+        <div class="tier-rank">4</div>
+        <div class="tier-body">
+          <h4>Wise County — Runaway Bay / Bridgeport</h4>
+          <div class="tier-sub">EF-2 Tornado (135 mph) &bull; 2.75" hail &bull; Disaster declaration</div>
+          <p>Compound peril: EF-2 tornado with 135 mph peak winds confirmed at two structures plus 2.75" hail — both at Runaway Bay. Disaster declaration issued. 20–40 families displaced. Dozens of homes with major damage. Commercial opportunities are limited due to rural character but include marinas, small commercial on Lake Bridgeport, agricultural operations, and municipal properties. Residential deployment is strong here given the disaster declaration and displacement.</p>
+          <div class="tier-chips">
+            <span class="chip peril-tornado">EF-2 Tornado</span>
+            <span class="chip peril-hail">2.75" Hail</span>
+            <span class="chip client-residential">Residential Priority</span>
+            <span class="chip client-commercial">Limited Commercial</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier-card high">
+        <div class="tier-rank">5</div>
+        <div class="tier-body">
+          <h4>Fannin County — Trenton</h4>
+          <div class="tier-sub">4.00" hail (LARGEST in TX) &bull; SPC photo-confirmed &bull; NEW #1 target</div>
+          <p>Largest confirmed hailstone in Texas for this event — 4.00" photo-confirmed at Trenton. Catastrophic total-loss roofing, severe vehicle/window/siding destruction. Storm chasers already canvassing Trenton–Whitewright–Leonard–Tom Bean corridor (per Facebook social media). Out-of-town roofers actively door-knocking. Time-sensitive deployment to reach homeowners before contractor lock-in.</p>
+          <div class="tier-chips">
+            <span class="chip peril-hail">4.00" Hail</span>
+            <span class="chip client-residential">Residential Priority</span>
+            <span class="chip tag-new">New #1 Target</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier-card high">
+        <div class="tier-rank">6</div>
+        <div class="tier-body">
+          <h4>Grayson County — Bells / Tom Bean / Sherman / Denison</h4>
+          <div class="tier-sub">3.50" hail (2nd largest in TX) &bull; 2.00" at Tom Bean &bull; NEW target</div>
+          <p>Second-largest confirmed hailstone in Texas for this event. 3.50" at Bells is catastrophic — total-loss roofing, severe vehicle damage, window and siding destruction. Sherman–Denison corridor on US-75 contains significant commercial, industrial, and retail development. Morning event (6–7 AM April 26) means damage reports are still developing.</p>
+          <div class="tier-chips">
+            <span class="chip peril-hail">3.50" Hail</span>
+            <span class="chip client-commercial">Commercial Priority</span>
+            <span class="chip client-residential">Residential</span>
+            <span class="chip tag-new">New Target</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier-card high">
+        <div class="tier-rank">7</div>
+        <div class="tier-body">
+          <h4>Palo Pinto County — Mineral Wells</h4>
+          <div class="tier-sub">2.50" hail (HailPoint radar) &bull; Total-loss roofing likely</div>
+          <p>HailPoint designates "major damage" for Mineral Wells at 2.50". No SPC ground-truth spotter report was filed for this location, but radar-derived data supports significant damage. Mineral Wells has a mix of commercial downtown, small industrial, and residential. Worth deploying scouts but not a primary commercial target due to lower density compared to DFW core.</p>
+          <div class="tier-chips">
+            <span class="chip peril-hail">2.50" Hail (Radar)</span>
+            <span class="chip client-residential">Residential Priority</span>
+            <span class="chip client-commercial">Limited Commercial</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════ COMMERCIAL DAMAGE PROFILE -->
+  <div class="section">
+    <div class="section-label">Commercial Analysis</div>
+    <h2>Commercial Damage Profile</h2>
+    <p>At the confirmed hail sizes (2.50"–4.00"), the following commercial building components are at high risk of damage requiring full replacement or significant repair:</p>
+
+    <div class="two-col">
+      <div>
+        <h3>Roofing Systems</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>System</th><th>Damage Expectation at 3.00"</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>TPO / PVC Membrane</td><td>Punctures, fractures — total loss likely</td></tr>
+            <tr><td>Modified Bitumen</td><td>Granule loss, fractures, splits — total loss</td></tr>
+            <tr><td>Built-Up Roofing (BUR)</td><td>Fractures, flood coat damage — total loss</td></tr>
+            <tr><td>EPDM</td><td>Impact fractures, seam stress — total loss</td></tr>
+            <tr><td>Standing Seam Metal</td><td>Dents, panel deformation, fastener stress</td></tr>
+            <tr><td>Metal R-Panel</td><td>Severe denting, panel replacement</td></tr>
+            <tr><td>Composition Shingle</td><td>Total loss — mat fracture, granule displacement</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Other Building Components</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>Component</th><th>Damage Expectation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>HVAC Condensers</td><td>Fin damage, refrigerant leaks, coil damage</td></tr>
+            <tr><td>RTU Housings</td><td>Panel denting, functional compromise</td></tr>
+            <tr><td>Skylights</td><td>Breakage, seal failure</td></tr>
+            <tr><td>Storefront Glazing</td><td>Breakage at 2.50"+</td></tr>
+            <tr><td>Metal Wall Panels</td><td>Denting, paint system failure</td></tr>
+            <tr><td>Gutters / Downspouts</td><td>Severe denting, separation</td></tr>
+            <tr><td>Signage / Awnings</td><td>Punctures, tears, structural damage</td></tr>
+            <tr><td>Parking Lot Lighting</td><td>Lens breakage, pole/arm damage</td></tr>
+            <tr><td>Vehicle Fleets</td><td>Total loss on unprotected vehicles</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Commercial Claim Complexity</div>
+      Commercial hail claims in this event will involve business interruption (BI) considerations for properties with interior water intrusion from compromised roofing, code upgrade requirements for roof systems that have reached end of useful life, and potential ACV-vs-RCV disputes on older commercial roofing. Multi-tenant retail and industrial properties may require coordination with multiple lessees for access and interior damage documentation.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════ TEXAS INSURANCE -->
+  <div class="section">
+    <div class="section-label">Regulatory</div>
+    <h2>Texas Insurance Considerations</h2>
+
+    <div class="two-col">
+      <div>
+        <h3>Carrier Obligations — Tex. Ins. Code Ch. 542</h3>
+        <table class="data-table">
+          <thead>
+            <tr><th>Requirement</th><th>Deadline</th><th>Statute</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Acknowledge claim, commence investigation, request proof-of-loss items</td><td>15 calendar days</td><td>§ 542.055(a)</td></tr>
+            <tr><td>Accept or reject claim (written notice with reasons if denied)</td><td>15 business days after receipt of all requested items</td><td>§ 542.056(a)</td></tr>
+            <tr><td>Extension if more time needed (one-time, with written notice of reasons)</td><td>45 calendar days from extension notice</td><td>§ 542.056(d)</td></tr>
+            <tr><td>Payment after acceptance</td><td>5 business days</td><td>§ 542.057(a)</td></tr>
+            <tr><td>Hard outer payment limit (triggers 542.060 penalties)</td><td>60 calendar days after receipt of all docs</td><td>§ 542.058(a)</td></tr>
+            <tr><td>Weather catastrophe extension (if declared by TDI Commissioner)</td><td>+15 days added to all above deadlines</td><td>§ 542.059(b)</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.82rem; color: var(--gray); margin-top:8px;">Texas Insurance Code Chapter 542, Subchapter B — Prompt Payment of Claims Act. Penalties: 18% per annum interest + attorney's fees (§ 542.060); reduced to post-judgment rate + 5% for weather claims under Chapter 542A.</p>
+      </div>
+      <div>
+        <h3>Key Watch Items</h3>
+        <ul style="padding-left: 20px; font-size: 0.92rem;">
+          <li><strong>Weather catastrophe extension (§ 542.059):</strong> Given the scale of this event (23 counties, disaster declaration), TDI Commissioner may declare a weather-related catastrophe, extending all Ch. 542 deadlines by an additional 15 days. Monitor TDI bulletins.</li>
+          <li><strong>Chapter 542A presuit notice:</strong> For weather-related property claims, a 61-day presuit notice is required before filing suit (§ 542A.003(a)).</li>
+          <li><strong>2% wind/hail deductible</strong> is the dominant DFW market standard (2026). On a $1M commercial property, that is a $20,000 deductible.</li>
+          <li><strong>Anti-concurrent causation (ACC)</strong> — watch for denials where wind and flood overlap (especially Tarrant County SW Fort Worth).</li>
+          <li><strong>Cosmetic damage exclusion endorsements</strong> — review policies for metal roof exclusions before scoping.</li>
+          <li><strong>Appraisal clause</strong> — critical leverage when carrier estimates fall short of actual replacement cost.</li>
+          <li><strong>Statute of limitations:</strong> 2 years from storm date (April 25, 2028).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════ DATA STATUS -->
+  <div class="section">
+    <div class="section-label">Intelligence Status</div>
+    <h2>Data Status &amp; Pending Updates</h2>
+
+    <div class="two-col">
+      <div>
+        <h3>Available Now</h3>
+        <ul style="padding-left: 20px; font-size: 0.92rem;">
+          <li>SPC Preliminary Local Storm Reports (62 TX hail, 18 wind, 5 tornado)</li>
+          <li>NWS EF-2 confirmation — Runaway Bay</li>
+          <li>HailPoint radar-derived hail maps</li>
+          <li>HailTrace property impact estimates</li>
+          <li>Wise County disaster declaration</li>
+          <li>Multiple news source confirmations</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Pending</h3>
+        <ul style="padding-left: 20px; font-size: 0.92rem;">
+          <li>NWS Fort Worth full event summary — survey teams still in field</li>
+          <li>Tornado path length and width data</li>
+          <li>Additional tornado confirmations (Archer, Clay, Jack, Parker Co.)</li>
+          <li>NOAA NCEI Storm Events Database — available July–August 2026</li>
+          <li>NWS tornado climatology database update</li>
+          <li>Mineral Wells / Stephenville ground-truth confirmation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════ SOURCES -->
+  <div class="section">
+    <div class="section-label">Sources</div>
+    <h2>Data Sources</h2>
+    <table class="data-table" style="font-size: 0.82rem;">
+      <thead>
+        <tr><th>Source</th><th>Type</th><th>Data</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="https://www.spc.noaa.gov/climo/reports/260425_rpts.html" target="_blank">SPC Storm Reports (260425)</a></td><td>Official — Preliminary</td><td>Ground-truth hail, wind, tornado reports</td></tr>
+        <tr><td><a href="https://www.weather.gov/fwd/" target="_blank">NWS Fort Worth</a></td><td>Official</td><td>EF-2 confirmation, damage surveys</td></tr>
+        <tr><td><a href="https://www.hailpoint.com/hail-maps-Dallas--TX" target="_blank">HailPoint — Dallas</a> · <a href="https://www.hailpoint.com/hail-maps-Fort-Worth--TX" target="_blank">Fort Worth</a></td><td>Commercial — Radar</td><td>Hail size estimates, damage classifications</td></tr>
+        <tr><td><a href="https://hailtrace.com/hail-maps/04-25-2026/texas" target="_blank">HailTrace — Apr 25</a> · <a href="https://hailtrace.com/hail-maps/04-26-2026/texas" target="_blank">Apr 26</a></td><td>Commercial — Radar</td><td>Property impact counts, hail swath maps</td></tr>
+        <tr><td><a href="https://www.fox4news.com/news/national-weather-service-confirms-ef-2-tornado-runaway-bay-area" target="_blank">FOX 4</a> · <a href="https://www.cbsnews.com/texas/news/north-texas-storms-two-dead-wise-parker-county-damage/" target="_blank">CBS Texas</a> · <a href="https://www.wfaa.com/article/weather/severe-weather/powerful-storm-hits-north-texas-40k-without-power-90-mph-winds-springtown/287-a4cb9a93-92a3-4e0a-a4c0-b2629dc191e6" target="_blank">WFAA</a> · <a href="https://www.nbcdfw.com/weather/weather-connection/texas-runaway-bay-springtown-tornado/4015819/" target="_blank">NBC 5</a></td><td>News</td><td>Damage reports, casualties, wind speeds</td></tr>
+        <tr><td><a href="https://www.foxweather.com/live-news/live-updates-dangerous-storms-threaten-oklahoma-texas-with-intense-tornadoes-gigantic-hail" target="_blank">Fox Weather — Live Updates</a> · <a href="https://www.foxweather.com/extreme-weather/see-it-destructive-storms-slam-texas-leaving-1-dead-severe-weather" target="_blank">Damage Photos</a></td><td>News</td><td>Storm tracking, NWS warning detail</td></tr>
+        <tr><td><a href="https://texasstormchasers.com/forecast/as-it-happened-north-texas-tornadoes-april-25-2026/" target="_blank">Texas Storm Chasers</a></td><td>Spotter</td><td>Ground-truth observations, live tracking</td></tr>
+        <tr><td><a href="https://cityofspringtown.com/april-25-2026-severe-weather-post-storm-information/" target="_blank">City of Springtown</a></td><td>Government</td><td>Post-storm damage, road closures</td></tr>
+        <tr><td><a href="https://www.wcmessenger.com/articles/possible-tornado-touches-down-in-runaway-bay-major-damage-reported/" target="_blank">Wise County Messenger</a></td><td>Local News</td><td>Street-level damage, power outage data</td></tr>
+        <tr><td><a href="https://www.tdi.texas.gov/consumer/storms/recoverytips.html" target="_blank">TDI</a> · <a href="https://www.stormersite.com/hail_reports/dallasfortwortharlington_texas/2026" target="_blank">Stormersite</a></td><td>State Gov / Hail Data</td><td>Insurance guidance, hail reports</td></tr>
+        <tr><td><a href="https://www.interactivehailmaps.com/local-hail-map/dallas-tx/" target="_blank">Interactive Hail Maps — Dallas</a> · <a href="https://www.interactivehailmaps.com/local-hail-map/fort-worth-tx/" target="_blank">Fort Worth</a></td><td>Commercial — Radar</td><td>Interactive hail swath maps</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════ FOOTER -->
+<footer class="footer">
+  <div>
+    <img class="footer-logo" src="https://images.squarespace-cdn.com/content/v1/5ec6d473aff3b65cb3516f6f/d6acebf3-3614-4679-a7ec-c65ab5fc97e8/JC+Full+Logo+All+White.png" alt="Justice Claims"><br>
+    <a href="tel:8887758784">(888) 775-8784</a> &nbsp;|&nbsp; <a href="mailto:info@justiceclaims.com">info@justiceclaims.com</a> &nbsp;|&nbsp; <a href="https://www.justiceclaims.com">justiceclaims.com</a>
+  </div>
+  <div class="confidential">Confidential — For Internal Use Only</div>
+</footer>
+
+<!-- ════════════════════════════════════════════════════ LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">&times;</button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+  <button class="lightbox-nav lightbox-prev" id="lightbox-prev" onclick="event.stopPropagation();lightboxNav(-1)">&#8249;</button>
+  <img id="lightbox-img" src="" alt="Enlarged photo" />
+  <button class="lightbox-nav lightbox-next" id="lightbox-next" onclick="event.stopPropagation();lightboxNav(1)">&#8250;</button>
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+// ── LIGHTBOX WITH NAVIGATION ──
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
+const lightboxCounter = document.getElementById('lightbox-counter');
+const lightboxPrev = document.getElementById('lightbox-prev');
+const lightboxNext = document.getElementById('lightbox-next');
+
+var lbCarouselId = null;
+var lbSlideIdx = 0;
+
+function openLightbox(src, caption, cid, idx) {
+  lightboxImg.src = src;
+  lightboxCaption.textContent = caption || '';
+  lbCarouselId = (cid !== undefined) ? cid : null;
+  lbSlideIdx = idx || 0;
+  lightbox.classList.add('active');
+  updateLightboxNav();
+}
+
+function updateLightboxNav() {
+  if (lbCarouselId === null) {
+    lightboxPrev.style.display = 'none';
+    lightboxNext.style.display = 'none';
+    lightboxCounter.textContent = '';
+    return;
+  }
+  var wrap = document.getElementById('crs-' + lbCarouselId);
+  if (!wrap) { lightboxPrev.style.display = 'none'; lightboxNext.style.display = 'none'; lightboxCounter.textContent = ''; return; }
+  var slides = wrap.querySelectorAll('.carousel-slide');
+  var show = slides.length > 1;
+  lightboxPrev.style.display = show ? 'block' : 'none';
+  lightboxNext.style.display = show ? 'block' : 'none';
+  lightboxCounter.textContent = show ? (lbSlideIdx + 1) + ' / ' + slides.length : '';
+}
+
+function lightboxNav(dir) {
+  if (lbCarouselId === null) return;
+  var wrap = document.getElementById('crs-' + lbCarouselId);
+  if (!wrap) return;
+  var slides = wrap.querySelectorAll('.carousel-slide');
+  if (slides.length <= 1) return;
+  lbSlideIdx = (lbSlideIdx + dir + slides.length) % slides.length;
+  var slide = slides[lbSlideIdx];
+  lightboxImg.src = slide.getAttribute('src');
+  lightboxCaption.textContent = slide.getAttribute('data-caption') || '';
+  lightboxCounter.textContent = (lbSlideIdx + 1) + ' / ' + slides.length;
+  goToSlide(lbCarouselId, lbSlideIdx);
+}
+
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) lightbox.classList.remove('active');
+});
+document.getElementById('lightbox-close').addEventListener('click', function() {
+  lightbox.classList.remove('active');
+});
+document.addEventListener('keydown', function(e) {
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'Escape') lightbox.classList.remove('active');
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+});
+
+// ── CAROUSEL LOGIC ──
+var carouselId = 0;
+function slideCarousel(id, dir) {
+  var wrap = document.getElementById('crs-' + id);
+  if (!wrap) return;
+  var slides = wrap.querySelectorAll('.carousel-slide');
+  var dots = wrap.querySelectorAll('.carousel-dot');
+  var counter = wrap.querySelector('.carousel-counter');
+  var capEl = wrap.querySelector('.carousel-caption');
+  var cur = 0;
+  slides.forEach(function(s, i) { if (s.classList.contains('active')) cur = i; });
+  slides[cur].classList.remove('active');
+  if (dots[cur]) dots[cur].classList.remove('active');
+  cur = (cur + dir + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  if (dots[cur]) dots[cur].classList.add('active');
+  if (counter) counter.textContent = (cur + 1) + ' / ' + slides.length;
+  if (capEl) capEl.textContent = slides[cur].getAttribute('data-caption') || '';
+}
+
+function goToSlide(id, idx) {
+  var wrap = document.getElementById('crs-' + id);
+  if (!wrap) return;
+  var slides = wrap.querySelectorAll('.carousel-slide');
+  var dots = wrap.querySelectorAll('.carousel-dot');
+  var counter = wrap.querySelector('.carousel-counter');
+  var capEl = wrap.querySelector('.carousel-caption');
+  slides.forEach(function(s) { s.classList.remove('active'); });
+  dots.forEach(function(d) { d.classList.remove('active'); });
+  slides[idx].classList.add('active');
+  if (dots[idx]) dots[idx].classList.add('active');
+  if (counter) counter.textContent = (idx + 1) + ' / ' + slides.length;
+  if (capEl) capEl.textContent = slides[idx].getAttribute('data-caption') || '';
+}
+
+// ── MAP DATA — multi-image per marker ──
+var markers = [
+  // ─── CRITICAL 3.00"+ ───
+  {lat:33.42,lng:-96.35,size:'4.00"',loc:'1 W Trenton',county:'Fannin',time:'6:40 AM Apr 26',color:'#D6492A',radius:25,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html',
+   imgs:[
+     {src:'screenshots/fb_galvan_trenton_hail_1.jpg',cap:'Hail damage — Trenton/Grayson Co. area. "Real hits that insurance will take seriously." (Facebook)',cr:'Christian Galvan / Facebook'},
+     {src:'https://assets2.cbsnewsstatic.com/hub/i/r/2026/04/26/fd235f45-e137-4b24-90df-d2a6e83519d6/thumbnail/620x349/4fec0ebdff76978cc5f80edd200894a2/hail-reports-lists.png',cap:'SPC hail reports list — 4.00" at Trenton is the largest confirmed stone in Texas',cr:'CBS Texas / SPC Data'},
+   ]},
+
+  {lat:33.57,lng:-96.45,size:'3.50"',loc:'4 SSW Bells',county:'Grayson',time:'10:18 AM Apr 26',color:'#D6492A',radius:22,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html',
+   imgs:[
+     {src:'https://assets2.cbsnewsstatic.com/hub/i/r/2026/04/26/fd235f45-e137-4b24-90df-d2a6e83519d6/thumbnail/620x349/4fec0ebdff76978cc5f80edd200894a2/hail-reports-lists.png',cap:'SPC hail reports list — 3.50" at Bells, second-largest confirmed stone in Texas',cr:'CBS Texas / SPC Data'},
+   ]},
+
+  {lat:32.71,lng:-96.95,size:'3.00"',loc:'Cockrell Hill / Dallas Baptist Univ.',county:'Dallas',time:'12:51 AM',color:'#D6492A',radius:19,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html',
+   imgs:[
+     {src:'screenshots/fb_ingersoll_hail_1.jpg',cap:'Hail penetrated roof decking — "Those holes are from the hail. Some came all the way thru." (Facebook)',cr:'Jessica Ingersoll / Facebook'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/16e4cdfcff88b0728a0d99c1e3fcd7c7.png',cap:'Lightning strikes over Dallas — storm passage through Cockrell Hill area',cr:'FOX Weather'},
+   ]},
+
+  {lat:32.90,lng:-97.54,size:'3.00"',loc:'1 WNW Azle',county:'Tarrant',time:'10:10 PM',color:'#D6492A',radius:19,
+   link:'https://www.foxweather.com/live-news/live-updates-dangerous-storms-threaten-oklahoma-texas-with-intense-tornadoes-gigantic-hail',
+   imgs:[
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/4d08bc0bebcc080fa87f90e5059f567c.png',cap:'TxDOT camera — intense storm winds at Azle, TX',cr:'FOX Weather / TxDOT'},
+     {src:'https://assets2.cbsnewsstatic.com/hub/i/r/2026/04/26/57105c1b-f6bd-4e04-9e21-0cd37f6edf1f/thumbnail/620x465/5c1ee7be8bfc385da33d08db7c183e54/img-5118.jpg',cap:'Supercell thunderstorm near Aledo and Azle',cr:'CBS Texas / Steven Nichols'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/6ef8a6946ac4c0eef89eade6596b3eba.png',cap:'Radar — lone supercell tracking toward NW DFW suburbs',cr:'FOX Weather'},
+   ]},
+
+  {lat:32.82,lng:-97.51,size:'3.00"',loc:'1 W Lakeside',county:'Tarrant',time:'10:43 PM',color:'#D6492A',radius:19,
+   link:'https://www.foxweather.com/live-news/live-updates-dangerous-storms-threaten-oklahoma-texas-with-intense-tornadoes-gigantic-hail',
+   imgs:[
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/52e091e2239b754eea1bacb19443ccad.png',cap:'Radar — dangerous supercell bearing down on Fort Worth',cr:'FOX Weather'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/42465ad045d8da975579ca7939f1dc6b.png',cap:'Intense supercell charging toward Fort Worth',cr:'FOX Weather'},
+   ]},
+
+  {lat:33.75,lng:-98.60,size:'3.00"',loc:'6 SSW Lakeside City',county:'Archer',time:'5:50 PM',color:'#D6492A',radius:19,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html',
+   imgs:[
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/3a2d432e6d03eaa267b511eccfea493d.png',cap:'Tornado-warned supercell near Scotland, TX — concentrated rotation',cr:'FOX Weather'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/28210f1047b40420ea4b9fe3590e9fe5.png',cap:'Tornado-warned supercell near Windthorst, TX',cr:'FOX Weather'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/4ac6997c0773e8c7f09c04f46695a1e6.png',cap:'TxDOT camera — hail pounding US 82 at Wichita Falls',cr:'FOX Weather / TxDOT'},
+   ]},
+
+  // ─── HIGH 2.00"–2.99" ───
+  {lat:32.76,lng:-97.51,size:'2.75"',loc:'3 W White Settlement',county:'Tarrant',time:'10:51 PM',color:'#002147',radius:17,
+   link:'https://www.foxweather.com/live-news/live-updates-dangerous-storms-threaten-oklahoma-texas-with-intense-tornadoes-gigantic-hail',
+   imgs:[
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/57f084e40d69ce5f65dd4a839dbaf0d5.png',cap:'NWS "Destructive" severe thunderstorm warning — active over White Settlement / Fort Worth',cr:'FOX Weather / NWS'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/3fca7d19880bed3e584c57386fc99b4b.png',cap:'Destructive supercell targeting White Settlement and western Tarrant County',cr:'FOX Weather'},
+   ]},
+
+  {lat:32.79,lng:-97.35,size:'2.75"',loc:'3 NNW Fort Worth',county:'Tarrant',time:'12:35 AM',color:'#002147',radius:17,
+   link:'https://www.cbsnews.com/texas/news/deadly-tornadoes-and-winds-strike-north-texas-conditional-risk-continues-sunday/',
+   imgs:[
+     {src:'https://assets2.cbsnewsstatic.com/hub/i/r/2026/04/26/83159f69-db3d-4dca-81bf-08836fce44b3/thumbnail/620x349/56a75a2d2c8f1de4d6bb9e42390e4156/0e293bf0-5fb2-491a-9a78-a4871208e837.jpg',cap:'Fallen tree on metal gate — Fort Worth',cr:'CBS Texas / Donnell Ballard'},
+   ]},
+
+  {lat:33.17,lng:-97.87,size:'2.75"',loc:'Runaway Bay (Hail)',county:'Wise',time:'8:47 PM',color:'#002147',radius:17,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html',
+   imgs:[
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/0794f2064c942dc362f963958fa905ff.png',cap:'Supercell bearing down on Runaway Bay — 2.75" hail confirmed before tornado',cr:'FOX Weather / Spotters'},
+   ]},
+
+  {lat:32.74,lng:-97.57,size:'2.50"',loc:'3 NNE Aledo',county:'Parker',time:'10:50 PM',color:'#002147',radius:16,
+   link:'https://www.cbsnews.com/texas/news/deadly-tornadoes-and-winds-strike-north-texas-conditional-risk-continues-sunday/',
+   imgs:[
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/49916164fff287f138a629536ef7201e.png',cap:'Radar — intense rain and huge hail hammering North Texas',cr:'FOX Weather'},
+   ]},
+
+  {lat:32.73,lng:-97.46,size:'2.50"',loc:'2 S White Settlement',county:'Tarrant',time:'10:59 PM',color:'#002147',radius:16,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html',
+   imgs:[]},
+
+  {lat:32.72,lng:-97.43,size:'2.25"',loc:'2 SW Westover Hills',county:'Tarrant',time:'11:16 PM',color:'#002147',radius:15,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html', imgs:[]},
+
+  {lat:33.32,lng:-98.00,size:'2.00"',loc:'11 NE Jacksboro',county:'Jack',time:'8:10 PM',color:'#002147',radius:14,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html', imgs:[]},
+
+  {lat:32.71,lng:-97.45,size:'2.00"',loc:'2 N Benbrook',county:'Tarrant',time:'11:15 PM',color:'#002147',radius:14,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html', imgs:[]},
+
+  {lat:32.69,lng:-97.21,size:'2.00"',loc:'3 N Kennedale / Lake Arlington',county:'Tarrant',time:'12:58 AM',color:'#002147',radius:14,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html', imgs:[]},
+
+  {lat:33.51,lng:-96.47,size:'2.00"',loc:'1 ESE Tom Bean',county:'Grayson',time:'10:23 AM Apr 26',color:'#002147',radius:14,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html', imgs:[]},
+
+  // ─── TORNADO / WIND ───
+  {lat:33.17,lng:-97.89,size:'EF-2 — 135 mph',loc:'Runaway Bay (Tornado)',county:'Wise',time:'~9:03 PM',color:'#7B2D8E',radius:20,
+   link:'https://www.fox4news.com/news/national-weather-service-confirms-ef-2-tornado-runaway-bay-area',
+   imgs:[
+     {src:'screenshots/fb_loya_runaway_bay_1.jpg',cap:'Tornado victim Juan Madrid\'s family home — Runaway Bay. "We tragically lost my father-in-law." (Facebook)',cr:'Mycaila Loya / Facebook'},
+     {src:'screenshots/fb_loya_runaway_bay_2.jpg',cap:'Tornado destruction — Runaway Bay neighborhood. Family requesting donations. (Facebook)',cr:'Mycaila Loya / Facebook'},
+     {src:'https://static-media.fox.com/fmcv3/prod/fts/dl5a23zjbe4efmy6/dyh3ogcg9rii9iyi.jpg',cap:'Aerial view — EF-2 tornado destruction, Runaway Bay',cr:'FOX 4 / Chad Casey'},
+     {src:'https://images.foxtv.com/static.fox4news.com/www.fox4news.com/content/uploads/2026/04/932/524/img_2709.png',cap:'NWS damage survey — EF-2 tornado path map, Wise County',cr:'FOX 4 / NWS Fort Worth'},
+     {src:'https://media.nbcdfw.com/2026/04/runaway-bay-08.png',cap:'EF-2 tornado destruction — Runaway Bay, Wise County',cr:'NBC 5 DFW'},
+     {src:'https://www.wcmessenger.com/wp-content/uploads/2026/04/DSC_9718-1024x683.jpg',cap:'Structural devastation — Cumberland Trail / Overland Trail',cr:'Wise Co. Messenger / Brian Knox'},
+     {src:'https://www.wcmessenger.com/wp-content/uploads/2026/04/DSC_9679-1024x683.jpg',cap:'Roof damage — Cactus Canyon Drive, Runaway Bay',cr:'Wise Co. Messenger / Brian Knox'},
+     {src:'https://assets3.cbsnewsstatic.com/hub/i/r/2026/04/26/a3f06188-2034-4b1f-8165-6ef9450e5810/thumbnail/620x349/7a56fae96971b2d25cda903d689d6717/10p-v-runaway-bay-damag-ktvtj8qw.jpg',cap:'Neighborhoods torn apart — Runaway Bay',cr:'CBS Texas / KTVT'},
+     {src:'https://media.nbcdfw.com/2026/04/KS_Confirmed-Tornado.04.26.26.png',cap:'NWS preliminary survey — EF-2 Runaway Bay, EF-1 Springtown',cr:'NBC 5 DFW / NWS'},
+     {src:'https://images.foxtv.com/static.fox4news.com/www.fox4news.com/content/uploads/2026/04/0/100/runaway-bay-tornado-damage-1.jpg',cap:'Tornado damage aftermath — Runaway Bay',cr:'FOX 4 DFW'},
+     {src:'https://static-media.fox.com/fmcv3/prod/fts/vrbdzbjfydll21q3/red8pkwouul9t1be.jpg',cap:'Structural damage and debris — Runaway Bay',cr:'FOX 4 DFW'},
+     {src:'https://images.foxweather.com/static.foxweather.com/www.foxweather.com/content/uploads/2026/04/668/376/screenshot-2026-04-26-at-12.17.37-pm.png',cap:'Storm damage overview — Runaway Bay (KDFW)',cr:'FOX Weather / KDFW'},
+     {src:'https://www.wcmessenger.com/wp-content/uploads/2026/04/First-responders-staging-at-airport-1024x768.jpeg',cap:'First responders staging at Bridgeport Municipal Airport',cr:'Wise Co. Messenger'},
+   ]},
+
+  {lat:32.96,lng:-97.68,size:'EF-1 — 105 mph',loc:'Springtown',county:'Parker',time:'9:48 PM',color:'#7B2D8E',radius:18,
+   link:'https://www.nbcdfw.com/news/local/1-dead-in-parker-county-after-storm-damage-near-springtown/4015800/',
+   imgs:[
+     {src:'screenshots/fb_dfwscanner_springtown_1.jpg',cap:'Storm damage along Hwy 199 — Springtown, Parker Co. (Facebook / 1.2K reactions)',cr:'DFW Scanner / Facebook'},
+     {src:'screenshots/fb_reed_springtown_1.jpg',cap:'"Counting My Blessings" — structural damage, Springtown, TX (Facebook)',cr:'Dayson Reed / Facebook'},
+     {src:'https://bdc2020.o0bc.com/wp-content/uploads/2026/04/Tornado-69ee840d59567-768x432.jpg',cap:'Metal building twisted in tree — Springtown (AP Photo)',cr:'AP / Elias Valverde II / Dallas Morning News'},
+     {src:'https://media.nbcdfw.com/2026/04/springtown-01.png',cap:'Devastated structures and debris — Springtown',cr:'NBC 5 DFW'},
+     {src:'https://static-media.fox.com/fmcv3/prod/fts/e2vkipgwgpcxswhn/mfsdftk4i4mwrck0.jpg',cap:'Structural and vehicle damage — Springtown',cr:'FOX 4 / Chad Casey'},
+     {src:'https://cityofspringtown.com/wp-content/uploads/2026/04/679859397_1438807664945731_9137892927249266785_n-1024x576.jpg',cap:'Storm damage survey — City of Springtown',cr:'City of Springtown'},
+     {src:'https://images.foxtv.com/static.fox4news.com/www.fox4news.com/content/uploads/2026/04/932/524/img_2710.png',cap:'NWS damage survey — EF-1 tornado path, NW Springtown to W Azle',cr:'FOX 4 / NWS Fort Worth'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/8bb1b818135e6583bdbdc4dad1fa72ef.png',cap:'89 mph wind gust report near Springtown',cr:'FOX Weather / Amateur Radio'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/4e7b52ba9d874fdc09bab96fd87a4fdd.png',cap:'PDS Tornado Warning — Parker County',cr:'FOX Weather / NWS'},
+   ]},
+
+  {lat:32.77,lng:-97.45,size:'70 mph ASOS',loc:'1 NW Westworth',county:'Tarrant',time:'12:18 AM',color:'#7B2D8E',radius:15,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html',
+   imgs:[
+     {src:'https://assets2.cbsnewsstatic.com/hub/i/r/2026/04/25/0af5f14b-c5e4-4606-8328-10cea50722d9/thumbnail/620x349/e4f05ced849d390c19e4962080e94996/3.png',cap:'Storm damage — North Texas',cr:'CBS Texas'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/cac8473af74718139f704ca0c3da5bd7.png',cap:'FAA ground stop — DFW International Airport',cr:'FOX Weather / FAA'},
+   ]},
+
+  {lat:32.67,lng:-96.92,size:'60 mph ASOS',loc:'4 NE Duncanville',county:'Dallas',time:'1:42 AM',color:'#7B2D8E',radius:13,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html', imgs:[]},
+
+  // ─── FLOOD ───
+  {lat:32.68,lng:-97.38,size:'Flash Flood',loc:'SW Fort Worth',county:'Tarrant',time:'Overnight',color:'#00695C',radius:14,
+   link:'https://www.fox4news.com/weather/dallas-weather-severe-storms-possible-saturday-evening',
+   imgs:[
+     {src:'https://static-media.fox.com/fmcv3/prod/fts/48dlcl97qrsjq22h/l3xqwt19gpzh5g70.jpg',cap:'Vehicle trapped in floodwater — SW Fort Worth',cr:'FOX 4 DFW'},
+   ]},
+
+  // ─── REGIONAL OVERVIEW (new node) ───
+  {lat:32.85,lng:-97.05,size:'Event Overview',loc:'DFW Metroplex — Regional',county:'Multi-County',time:'Apr 25–26',color:'#AAABAC',radius:12,
+   link:'https://www.spc.noaa.gov/climo/reports/260425_rpts.html',
+   imgs:[
+     {src:'https://assets2.cbsnewsstatic.com/hub/i/r/2026/04/26/2387087c-13c1-454d-882c-ab1163518903/thumbnail/620x827/6b2bd8703007b9d6e03de9156475682b/hail.jpg',cap:'Baseball-sized hailstone specimen — North Texas, exact location unverified',cr:'CBS Texas / Craig Gibson'},
+     {src:'https://www.spc.noaa.gov/climo/reports/260425_rpts.gif',cap:'SPC storm reports — 14 tornadoes, 40 wind, 181 hail reports nationwide',cr:'NOAA / SPC'},
+     {src:'https://www.spc.noaa.gov/climo/reports/260425_rpts_filtered.gif',cap:'SPC filtered reports — 29 large hail, 13 tornadoes, 26 significant wind',cr:'NOAA / SPC'},
+     {src:'https://cdn.hailtrace.com/storm-image-previews/04-25-2026/Texas/sales-header.png',cap:'HailTrace hail swath map — Texas, April 25, 2026',cr:'HailTrace'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/5c5ea850144e41df48ebfbde240a87ea.png',cap:'Storm reports summary — tornadoes, wind, and hail across 5 states',cr:'FOX Weather'},
+     {src:'https://a57.foxnews.com/assets.foxnews.com/liveblog/fw/prod/images/2026/04/624/351/6885d9ad91d084078658487940490255.png',cap:'Power outages — 40,000+ customers without power across North Texas',cr:'FOX Weather / PowerOutage.com'},
+     {src:'https://assets1.cbsnewsstatic.com/hub/i/r/2026/04/26/c9dad78a-2ea3-43cb-b05c-5aa71c36ce38/thumbnail/620x349/189cb5f5532f48699ce07850ec25cacf/wind-reports-list.png',cap:'Wind gust measurements — all SPC wind reports',cr:'CBS Texas'},
+   ]},
+];
+
+// ── BUILD MAP ──
+document.addEventListener('DOMContentLoaded', function() {
+  var map = L.map('storm-map', {center:[32.85,-97.30], zoom:9, scrollWheelZoom:true});
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19
+  }).addTo(map);
+
+  markers.forEach(function(m) {
+    var circle = L.circleMarker([m.lat, m.lng], {
+      radius: m.radius, fillColor: m.color, color:'#fff', weight:2, fillOpacity:0.85
+    }).addTo(map);
+
+    var cid = carouselId++;
+    var html = '<div class="map-popup">';
+
+    if (m.imgs && m.imgs.length > 0) {
+      html += '<div class="carousel" id="crs-' + cid + '">';
+      m.imgs.forEach(function(img, i) {
+        html += '<img class="carousel-slide' + (i === 0 ? ' active' : '') + '" src="' + img.src + '" data-caption="' + (img.cap||'').replace(/"/g,'&quot;') + '" alt="" onclick="openLightbox(\'' + img.src + '\',\'' + (img.cap||'').replace(/'/g,"\\'") + '\',' + cid + ',' + i + ')" />';
+      });
+      if (m.imgs.length > 1) {
+        html += '<button class="carousel-btn carousel-prev" onclick="event.stopPropagation();slideCarousel(' + cid + ',-1)">&#8249;</button>';
+        html += '<button class="carousel-btn carousel-next" onclick="event.stopPropagation();slideCarousel(' + cid + ',1)">&#8250;</button>';
+        html += '<div class="carousel-counter">1 / ' + m.imgs.length + '</div>';
+        html += '<div class="carousel-dots">';
+        m.imgs.forEach(function(img, i) {
+          html += '<div class="carousel-dot' + (i === 0 ? ' active' : '') + '" onclick="event.stopPropagation();goToSlide(' + cid + ',' + i + ')"></div>';
+        });
+        html += '</div>';
+      }
+      html += '<div class="carousel-caption">' + (m.imgs[0].cap||'') + '</div>';
+      html += '</div>';
+    }
+
+    html += '<div class="map-popup-body">';
+    html += '<div class="map-popup-size">' + m.size + '</div>';
+    html += '<div class="map-popup-title">' + m.loc + '</div>';
+    html += '<div class="map-popup-detail">' + m.county + ' County &bull; ' + m.time;
+    if (m.imgs && m.imgs.length > 0) html += '<br>' + m.imgs[0].cr;
+    html += '</div>';
+    if (m.link) html += '<a class="map-popup-source" href="' + m.link + '" target="_blank">View Source</a>';
+    if (m.imgs && m.imgs.length > 1) html += ' <span style="font-size:0.6rem;color:#AAABAC;margin-left:6px;">' + m.imgs.length + ' photos</span>';
+    html += '</div></div>';
+
+    circle.bindPopup(html, {maxWidth:360});
+  });
+
+  L.marker([33.20,-97.95], {
+    icon: L.divIcon({className:'',
+      html:'<div style="font-family:Montserrat,sans-serif;font-size:11px;font-weight:700;color:#7B2D8E;white-space:nowrap;text-shadow:0 1px 3px #fff,0 -1px 3px #fff,1px 0 3px #fff,-1px 0 3px #fff;">EF-2 TORNADO PATH</div>',
+      iconSize:[120,20], iconAnchor:[60,10]})
+  }).addTo(map);
+
+  L.marker([32.93,-97.62], {
+    icon: L.divIcon({className:'',
+      html:'<div style="font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;color:#7B2D8E;white-space:nowrap;text-shadow:0 1px 3px #fff,0 -1px 3px #fff,1px 0 3px #fff,-1px 0 3px #fff;">EF-1 TORNADO PATH</div>',
+      iconSize:[110,20], iconAnchor:[55,10]})
+  }).addTo(map);
+});
+</script>
+
+</body>
+</html>
